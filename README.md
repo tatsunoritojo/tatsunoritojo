@@ -25,6 +25,7 @@
 - [MacKairu](https://github.com/tatsunoritojo/MacKairu) — a resident mascot AI for macOS
 - [Onedrop attendance & ops](https://tatsunoritojo.com/works/education-ops) — school operations systems (attendance and related tooling; not the public school website)
 - [こどもの進路案内所](https://kodomo-shinro.jp) · [通信制高校診断](https://shindan.kodomo-shinro.jp/) — two sites built for Onedrop (parent guide + diagnostic)
+- [あいプリントLab](https://hirodai-3d-aiprint.com/) — Hiroshima University 3D-printer circle site (redesign; accessibility-first)
 
 <p align="center">
   <sub>Public experiments live in the pin below · more at <a href="https://github.com/tatsunoritojo/pin-only">pin-only</a></sub>
