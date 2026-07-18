@@ -1,11 +1,12 @@
 <!--
   Mobile-first profile surface:
-  - one wide banner (not tall square) so Start here stays near first scroll
-  - no multi-column image tables
-  - no autoplay video (unreliable + heavy on mobile data)
+  - one wide banner so Start here stays near first scroll
+  - no multi-column galleries, no autoplay video
+  Banner: assets/pin-banner.jpg (= variations/05-flat-split)
+  Alts: assets/alt-01-geometric.jpg, assets/alt-07-washi-ink.jpg
 -->
 <p align="center">
-  <img src="assets/pin-banner.jpg" alt="Pin — profile mascot" width="100%" />
+  <img src="assets/pin-banner.jpg" alt="From education into software" width="100%" />
 </p>
 
 <h1 align="center">Tatsunori Tojo</h1>
@@ -23,5 +24,5 @@
 - [通信制高校診断](https://shindan.kodomo-shinro.jp/) — correspondence high school diagnostic
 
 <p align="center">
-  <sub>More play in <a href="https://github.com/tatsunoritojo/pin-only">pin-only</a> · public code in pins below</sub>
+  <sub>Public experiments live in the pin below · more at <a href="https://github.com/tatsunoritojo/pin-only">pin-only</a></sub>
 </p>
