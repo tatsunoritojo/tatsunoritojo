@@ -4,9 +4,10 @@
   - no multi-column galleries, no autoplay video
   Banner: assets/pin-banner.jpg (= variations/05-flat-split)
   Alts: assets/alt-01-geometric.jpg, assets/alt-07-washi-ink.jpg
-  Claims (fact-checked with owner 2026-07-18):
+  Claims (fact-checked with owner 2026-07-18 / 2026-07-19):
   - Onedrop: built attendance/ops systems — NOT the public school website (onedrop2025.com)
   - Kodomo Shinro pair: commissioned by Onedrop — site + diagnostic (2 products)
+  - Dev loop: ChatGPT (design/wall-bounce + PR merge gate) → Claude Code (impl) → Codex (review) → human (Tatsunori) → PR
 -->
 <p align="center">
   <img src="assets/pin-banner.jpg" alt="From education into software" width="100%" />
@@ -27,6 +28,19 @@
 - [こどもの進路案内所](https://kodomo-shinro.jp) · [通信制高校診断](https://shindan.kodomo-shinro.jp/) — two sites built for Onedrop (parent guide + diagnostic)
 - [あいプリントLab](https://hirodai-3d-aiprint.com/) — Hiroshima University 3D-printer circle site (redesign; accessibility-first)
 - [シフリー](https://tatsunoritojo.com/works/shifree) — shift-scheduling SaaS for small teams (希望→確定→Google Calendar; code private)
+
+### How I ship
+
+A multi-agent loop with a human gate on every merge:
+
+1. **ChatGPT** — wall-bounce, framing, and design
+2. **Claude Code** — implementation
+3. **Codex** — adversarial review of that implementation
+4. **Me** — review Codex findings and decide what to keep
+5. **PR** — open the change set
+6. **ChatGPT** — PR review: send back or merge
+
+Then the cycle repeats. Tools draft and critique; I own the judgment.
 
 <p align="center">
   <sub>Public experiments live in the pin below · more at <a href="https://github.com/tatsunoritojo/pin-only">pin-only</a></sub>
