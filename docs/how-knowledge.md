@@ -2,73 +2,120 @@
 
 ![How knowledge compounds diagram](../assets/diagrams/how-knowledge-v2.png)
 
-Chat is draft. Claims need evidence. Outcomes decide what survives.
+## What this page is
 
-This page is the prose companion to the diagram on my [GitHub profile](https://github.com/tatsunoritojo).  
-**日本語:** [How knowledge compounds（日本語）](./ja/how-knowledge.md)  
-Related: [How I ship](./how-i-ship.md) · [How Claude Code works here](./how-claude.md)
+This page explains **how I turn messy observations into something I can act on**—and when that becomes a software change.
+
+In short:
+
+- Chat is a **draft**, not the record of truth.
+- I write **claims** with evidence (usually in **Obsidian**).
+- Product decisions that must stick go into **repo docs / ADRs**.
+- Work that will change code is cut as a **GitHub Issue**.
+- After shipping, I **learn**—many claims get weaker or die.
+
+**日本語:** [How knowledge compounds（日本語）](./ja/how-knowledge.md)
+
+Also:
+
+- [How I ship](./how-i-ship.md) — idea → production for one change  
+- [How Claude Code works here](./how-claude.md) — implementer vs owner  
 
 ---
 
-## Where things live
+## Who this is for
 
-| Home | Role |
-|------|------|
-| **Obsidian** | Claims, judgment notes, research capture—the “second brain” layer |
-| **repo docs / ADR** | Decisions that affect a **product**—when it becomes shared truth in the repository |
-| **GitHub Issue** | Scopes the **change** (acceptance criteria, one unit of work) |
-
-I do **not** claim that all knowledge lives in Obsidian, or that every repo is a full SSOT for everything. Placement depends on whether the thing is personal judgment, product decision, or implementable change.
+| Reader | What you should get |
+|--------|---------------------|
+| Profile visitor | Why I separate “thinking,” “docs,” and “Issues” |
+| Collaborator | Where to look for claims vs change tickets |
+| Future me | Capture → decide → build → learn |
 
 ---
 
-## Stages
+## Where things live (before the steps)
 
-### CAPTURE (vault)
+| Place | Use it for |
+|-------|------------|
+| **Obsidian** | Claims, judgment notes, research capture |
+| **Repo docs / ADR** | Decisions that affect a **product** and should outlive chat |
+| **GitHub Issue** | The **change** unit: scope and acceptance |
+
+I do **not** say “everything is in Obsidian” or “every repo is the single source of truth for everything.”
+
+---
+
+## The flow at a glance
+
+| Stage | Steps | Plain meaning |
+|-------|--------|----------------|
+| **Capture** | 1 → 2 | Notice something; write a claim you can revisit |
+| **Decide** | 3 → 4 | If it matters for a product, document it; if we will change code, open an Issue |
+| **Build** | 5 → 6 | Implement and check (see [How I ship](./how-i-ship.md)) |
+| **Learn** | 7 → back to 2 | Did the claim hold? Update or drop it in the vault |
+
+```
+observe → claim (Obsidian) → docs/ADR if needed → Issue → build → evaluate
+                ↑______________ learn (not every outcome graduates) ___|
+```
+
+---
+
+## Steps (same as the diagram)
+
+### Capture (vault)
 
 1. **Observe evidence**  
-   Research, field feedback, review notes, production incidents, user reactions—anything worth not losing.
+   Research, field feedback, reviews, incidents, user reactions—anything worth not losing.
 
 2. **Normalize a claim** → **Obsidian**  
-   Turn observation into a claim with evidence, intended use, and risk.  
-   This is where fuzzy chat becomes something I can revisit.
+   Turn the observation into a claim with evidence, intended use, and risk.
 
-### DECIDE (docs then Issue)
+### Decide (docs, then Issue)
 
-3. **Record decision context** → **repo** (when product is affected)  
-   Docs and ADRs when the decision will outlive the chat and affect how software is built.  
-   Personal notes may stay in the vault until they graduate.
+3. **Record decision context** → **repo** when a product is affected  
+   Docs / ADRs when the decision must survive chat and guide how software is built.
 
 4. **Define scope & acceptance** → **GitHub Issue**  
-   Criteria, one change at a time.  
-   Spec/docs and Issue stay separate: docs say *what is true*; Issue says *what we change next*.
+   What we change next, and how we know we’re done.  
+   Docs say *what is true*; Issues say *what we change*.
 
-### BUILD (repo)
+### Build (repo)
 
 5. **Implement on a branch**  
-   Scoped changes. Detail of tools and gates: [How I ship](./how-i-ship.md).
+   Scoped changes. Tooling detail: [How I ship](./how-i-ship.md).
 
 6. **Verify behavior**  
-   Tests, build, and hands-on checks as appropriate—not “green CI only.”
+   Tests, build, and hands-on when needed—not “CI green only.”
 
-### LEARN (back to vault)
+### Learn (back to the vault)
 
 7. **Evaluate the outcome**  
    Promote, revise, or reject what we believed.  
-   **learn → next claim (Obsidian):** not every outcome graduates; many claims get weakened or dropped.
+   **learn → next claim (Obsidian):** not every outcome becomes a stronger claim.
 
 ---
 
 ## How this connects to shipping
 
-Knowledge → Issue is how research becomes a controlled change.  
-Shipping without a claim trail is how teams re-learn the same lesson.  
-Claims without outcomes are just opinions with better formatting.
+| Path | Meaning |
+|------|---------|
+| Knowledge → Issue | Research becomes a controlled change |
+| Ship without claims | Easy to re-learn the same lesson |
+| Claims without outcomes | Opinions with nicer formatting |
 
 ---
 
 ## What this is not
 
-- Not “everything goes in the vault forever.”
-- Not “chat history is the source of truth.”
-- Not a replacement for [How I ship](./how-i-ship.md)—this is the longer arc *around* a change.
+- Not “save everything in the vault forever”
+- Not “chat history is the source of truth”
+- Not a full replacement for [How I ship](./how-i-ship.md)—this is the longer arc *around* a change
+
+---
+
+## Links
+
+- [How I ship](./how-i-ship.md)  
+- [How Claude Code works here](./how-claude.md)  
+- Profile: [tatsunoritojo](https://github.com/tatsunoritojo)

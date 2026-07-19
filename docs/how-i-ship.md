@@ -2,75 +2,118 @@
 
 ![How I ship diagram](../assets/diagrams/how-i-ship-v4.png)
 
-Not a one-shot magic button. One change at a time. Issue-scoped. Tools propose and critique; **I decide what ships.**
+## What this page is
 
-This page is the prose companion to the diagram on my [GitHub profile](https://github.com/tatsunoritojo).  
-**日本語:** [How I ship（日本語）](./ja/how-i-ship.md)  
-Related: [How knowledge compounds](./how-knowledge.md) · [How Claude Code works here](./how-claude.md)
+This page explains **how I take a software change from idea to production** when I work with AI tools.
+
+In short:
+
+- I do **not** ask AI to “just ship it.”
+- I cut work into **one GitHub Issue at a time**.
+- AI tools **propose and review**.
+- **I decide** what merges.
+
+**日本語:** [How I ship（日本語）](./ja/how-i-ship.md)
+
+Also on this profile:
+
+- [How knowledge compounds](./how-knowledge.md) — how ideas become claims and Issues  
+- [How Claude Code works here](./how-claude.md) — what Claude Code is allowed to do (and not do)
 
 ---
 
-## Roles (who does what)
+## Who this is for
 
-| Role | Tools | Responsibility |
-|------|--------|----------------|
-| **Explore / critique** | ChatGPT, Codex | Wall-bounce design, adversarial review vs Issue scope |
-| **Implement** | Claude Code | Branch work, open PR, record decisions in the PR |
-| **Control plane** | GitHub Issue | Scope, acceptance criteria, one change unit |
-| **Decide** | Human (me) | Keep or reject review findings; merge or send back |
-
-Color on the diagram maps to these roles, not to “AI good / human bad.”
+| Reader | What you should get |
+|--------|---------------------|
+| Visitor to my profile | How AI fits into my shipping process (not magic) |
+| Collaborator | Where Issue, PR, and merge sit |
+| Future me | The loop I try to keep |
 
 ---
 
-## Steps
+## The flow at a glance
 
-### PLAN
+| Phase | Steps | Purpose |
+|-------|--------|---------|
+| **Plan** | 1 → 2 | Decide *what* change, and write it as an Issue |
+| **Build · review (loop)** | 3 → 4 → 5 | Implement, get hard review, decide revise or ready |
+| **Ship** | 6 → 7 | Open PR, then **I** merge (or send back) |
 
-1. **Frame the change (ChatGPT)**  
-   Explore the problem, options, and rough design. This is conversation, not a contract.
+```
+idea → plan (Issue) → build/review loop → PR → I merge → production
+                ↑______________revise_________________|
+```
 
-2. **Define scope & acceptance (me · GitHub Issue)**  
-   Cut the work into one Issue: acceptance criteria, docs links, what “done” means.  
-   This is the control plane for everything after.
+---
 
-### BUILD · REVIEW (loop)
+## Who does what
 
-3. **Implement (Claude Code)**  
-   Scoped changes on a dedicated branch. No direct push to main.
+| Role | Who / tools | Job |
+|------|-------------|-----|
+| Explore | ChatGPT | Think through the change (design chat, not a contract) |
+| Scope | Me + **GitHub Issue** | Acceptance criteria; one change unit |
+| Implement | **Claude Code** | Work on a branch; open the PR |
+| Hard review | **Codex** | Challenge the diff against the Issue |
+| Decide findings | **Me** | Keep or drop review comments |
+| Merge | **Me** | Only I merge to main |
 
-4. **Adversarial review (Codex)**  
-   Review against the Issue scope—not against vibes. Findings are candidates, not orders.
+Diagram colors follow these roles.
 
-5. **Human judgment (me)**  
-   I keep or reject each finding.  
+---
+
+## Steps (same as the diagram)
+
+### Plan
+
+1. **Frame the change** — ChatGPT  
+   Explore the problem and options. Still a conversation.
+
+2. **Define scope & acceptance** — me, GitHub Issue  
+   Write what “done” means. Everything after is bound to this Issue.
+
+### Build · review (loop)
+
+3. **Implement** — Claude Code  
+   Scoped work on a branch. No direct push to main.
+
+4. **Adversarial review** — Codex  
+   Review against Issue scope, not against “vibes.”
+
+5. **Human judgment** — me  
    - **revise** → back to implement (same Issue)  
    - **ready** → leave the loop and open a PR
 
-### SHIP
+### Ship
 
-6. **Open PR (Claude Code)**  
-   Link the Issue, record decisions (including which Codex notes were rejected and why).
+6. **Open PR** — Claude Code  
+   Link the Issue; record decisions (including rejected review notes).
 
-7. **Human merge gate (me)**  
-   ChatGPT may assist with review discussion. **I merge** (or send back to the Issue).  
-   Then the change can go to production.
+7. **Human merge gate** — me  
+   ChatGPT may help discuss the PR. **I merge** or send the work back to the Issue.  
+   Then it can go to production.
 
-### Feedback paths
+---
 
-- **Loop revise:** judgment → implement (still on the same Issue).  
-- **Issue revise:** merge gate → Issue (scope or acceptance needs to change—don’t restart the universe).
+## Feedback paths
+
+| Path | When | Goes to |
+|------|------|---------|
+| **Loop revise** | Implementation or review is not good enough | Step 3 (implement), same Issue |
+| **Issue revise** | Scope or acceptance is wrong | Step 2 (Issue) — do not restart from zero |
 
 ---
 
 ## What this is not
 
-- Not “AI merges for me.”
-- Not one giant PR for a vague goal.
-- Not treating chat logs as the source of truth (see [knowledge](./how-knowledge.md)).
+- Not “AI merges for me”
+- Not one giant PR for a vague goal
+- Not treating chat logs as the source of truth ([knowledge](./how-knowledge.md))
 
 ---
 
-## Evidence / practice
+## Links
 
-The same shape shows up in private product work (e.g. Issue → branch → PR → human merge, with adversarial review before PR). Details vary by repo; the public diagram is the portable version.
+- Diagram on profile: [tatsunoritojo](https://github.com/tatsunoritojo)  
+- [How knowledge compounds](./how-knowledge.md)  
+- [How Claude Code works here](./how-claude.md)
