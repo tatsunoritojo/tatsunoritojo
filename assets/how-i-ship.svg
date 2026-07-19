@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 1006" width="700" height="1006" role="img" aria-labelledby="title desc">
   <title id="title">How I ship</title>
-  <desc id="desc">ChatGPT designs, enter repository, Claude Code implements, Codex reviews, human reviews, PR, ChatGPT decides merge or return, then repeat.</desc>
+  <desc id="desc">ChatGPT wall-bounce and design, Issue controls work with acceptance criteria, Claude Code implements, Codex reviews, human reviews, PR, ChatGPT decides merge or return, then repeat.</desc>
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0%" stop-color="#f7f4ef"/>
@@ -15,7 +15,7 @@
   </defs>
   <rect width="700" height="1006" rx="24" fill="url(#bg)"/>
   <text x="350" y="48" text-anchor="middle" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="28" font-weight="700" fill="#0f172a">How I ship</text>
-  <text x="350" y="76" text-anchor="middle" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" fill="#64748b">multi-agent loop · human gate on every merge</text>
+  <text x="350" y="76" text-anchor="middle" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" fill="#64748b">Issue-driven · multi-agent · human gate on every merge</text>
   <g font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" filter="url(#shadow)">
     <rect x="90" y="110" width="500" height="84" rx="16" fill="#ffffff" stroke="#99f6e4" stroke-width="2"/>
     <circle cx="132" cy="152" r="20" fill="#0d9488"/>
@@ -25,13 +25,13 @@
     <rect x="90" y="222" width="500" height="84" rx="16" fill="#ffffff" stroke="#7dd3fc" stroke-width="2"/>
     <circle cx="132" cy="264" r="20" fill="#0369a1"/>
     <text x="132" y="270" text-anchor="middle" font-size="16" font-weight="700" fill="#fff">2</text>
-    <text x="170" y="258" font-size="18" font-weight="700" fill="#0f172a">Repository</text>
-    <text x="170" y="282" font-size="13" fill="#64748b">open the target repo · branch / issue / cwd</text>
+    <text x="170" y="258" font-size="18" font-weight="700" fill="#0f172a">Issue</text>
+    <text x="170" y="282" font-size="13" fill="#64748b">control the work · acceptance criteria</text>
     <rect x="90" y="334" width="500" height="84" rx="16" fill="#ffffff" stroke="#a5b4fc" stroke-width="2"/>
     <circle cx="132" cy="376" r="20" fill="#4f46e5"/>
     <text x="132" y="382" text-anchor="middle" font-size="16" font-weight="700" fill="#fff">3</text>
     <text x="170" y="370" font-size="18" font-weight="700" fill="#0f172a">Claude Code</text>
-    <text x="170" y="394" font-size="13" fill="#64748b">implementation in that repo</text>
+    <text x="170" y="394" font-size="13" fill="#64748b">implement on a branch in the repo</text>
     <rect x="90" y="446" width="500" height="84" rx="16" fill="#ffffff" stroke="#fcd34d" stroke-width="2"/>
     <circle cx="132" cy="488" r="20" fill="#d97706"/>
     <text x="132" y="494" text-anchor="middle" font-size="16" font-weight="700" fill="#fff">4</text>
@@ -63,6 +63,6 @@
   </g>
   <path d="M590 824 C 670 824, 670 152, 590 152" fill="none" stroke="#0d9488" stroke-width="2.5" stroke-dasharray="6 5" marker-end="url(#arrow)"/>
   <text x="650" y="488" text-anchor="middle" transform="rotate(90 650 488)" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="600" fill="#0d9488">repeat</text>
-  <text x="350" y="958" text-anchor="middle" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#64748b">Tools draft and critique · I own the judgment</text>
-  <text x="350" y="982" text-anchor="middle" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" fill="#94a3b8">ChatGPT → repo → Claude Code → Codex → Me → PR → ChatGPT</text>
+  <text x="350" y="958" text-anchor="middle" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#64748b">Tools draft and critique · Issues control scope · I own the judgment</text>
+  <text x="350" y="982" text-anchor="middle" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12" fill="#94a3b8">ChatGPT → Issue → Claude Code → Codex → Me → PR → ChatGPT</text>
 </svg>
