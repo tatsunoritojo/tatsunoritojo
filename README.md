@@ -1,7 +1,7 @@
 <!--
   Mobile-first profile surface:
   - one wide banner so Start here stays near first scroll
-  - no multi-column galleries; process diagrams use looping animated WebP (spotlight walk; not GIF)
+  - no multi-column galleries, no autoplay video
   Banner: assets/pin-banner.jpg (= variations/05-flat-split)
   Alts: assets/alt-01-geometric.jpg, assets/alt-07-washi-ink.jpg
   Claims (fact-checked with owner 2026-07-18 / 2026-07-19):
@@ -37,7 +37,7 @@
 Not a one-shot magic button. One change at a time.
 
 <p align="center">
-  <img src="assets/diagrams/how-i-ship-loop.webp" alt="How I ship: starts from my idea, frame with repo-connected ChatGPT, define Issue and acceptance, implement on a branch with Claude Code, Codex adversarial review, human judgment (revise or ready), open PR, human merge gate, then production. Loop revise returns to implement; merge-gate revise returns to the Issue. Tools propose and critique; I decide what ships." width="100%" />
+  <img src="assets/diagrams/how-i-ship-v5.png" alt="How I ship: starts from my idea, frame with repo-connected ChatGPT, define Issue and acceptance, implement on a branch with Claude Code, Codex adversarial review, human judgment (revise or ready), open PR, human merge gate, then production. Loop revise returns to implement; merge-gate revise returns to the Issue. Tools propose and critique; I decide what ships." width="100%" />
 </p>
 
 <p align="center"><sub>
@@ -54,7 +54,7 @@ Tools propose and critique. I decide what ships.<br/>
 Useful observations become evidence-backed claims before they guide implementation.
 
 <p align="center">
-  <img src="assets/diagrams/how-knowledge-loop.webp" alt="How knowledge compounds: observe evidence, normalize a claim in Obsidian, record decision context in repo docs or ADRs when product is affected, define scope via GitHub Issue, implement on a branch, verify behavior, evaluate outcome; learn returns to the next claim in the vault" width="100%" />
+  <img src="assets/diagrams/how-knowledge-v2.png" alt="How knowledge compounds: observe evidence, normalize a claim in Obsidian, record decision context in repo docs or ADRs when product is affected, define scope via GitHub Issue, implement on a branch, verify behavior, evaluate outcome; learn returns to the next claim in the vault" width="100%" />
 </p>
 
 <p align="center"><sub>Useful observations become evidence-backed claims; outcomes decide what survives. Decisions move into repository docs when they affect a product. Chat is draft, not source of truth.<br/>
@@ -68,7 +68,7 @@ Useful observations become evidence-backed claims before they guide implementati
 Claude Code is the implementer in the repository — not the product owner.
 
 <p align="center">
-  <img src="assets/diagrams/how-claude-loop.webp" alt="How Claude Code works here: reads Issue and docs, does scoped branch changes with tests and build, does not own product scope or merge; after implement, Codex review, human judgment, Claude opens PR, then human merge gate" width="100%" />
+  <img src="assets/diagrams/how-claude-v4.png" alt="How Claude Code works here: reads Issue and docs, does scoped branch changes with tests and build, does not own product scope or merge; after implement, Codex review, human judgment, Claude opens PR, then human merge gate" width="100%" />
 </p>
 
 <p align="center"><sub>Claude Code implements scoped changes; I own product decisions, review judgment, and merge.<br/>
