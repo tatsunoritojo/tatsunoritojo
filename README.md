@@ -34,38 +34,9 @@
 
 ### How I ship
 
-```mermaid
-flowchart TB
-  subgraph PLAN
-    A["1 Frame the change<br/>ChatGPT · options and constraints"]
-    B["2 Define scope and acceptance<br/>Issue · docs · criteria"]
-  end
-
-  subgraph BUILD
-    C["3 Implement on a branch<br/>Claude Code · scoped changes"]
-    D["4 Verify behavior<br/>tests · build · hands-on"]
-  end
-
-  subgraph REVIEW
-    E["5 Run adversarial review<br/>Codex · diff vs scope"]
-    F["6 Apply human judgment<br/>I verify findings · keep or reject"]
-  end
-
-  subgraph SHIP
-    G["7 Open the pull request<br/>link Issue · record decisions"]
-    H["8 Human merge gate<br/>ChatGPT reviews · I merge or revise"]
-  end
-
-  A --> B --> C --> D --> E --> F --> G --> H
-  H -. revise .-> B
-
-  classDef human fill:#14532d,stroke:#166534,color:#f0fdf4
-  classDef ai fill:#f0fdfa,stroke:#0f766e,color:#0f172a
-  classDef work fill:#ffffff,stroke:#94a3b8,color:#0f172a
-  class A,C,E ai
-  class B,D,G work
-  class F,H human
-```
+<p align="center">
+  <img src="assets/diagrams/how-i-ship.png" alt="How I ship: frame the change, define Issue and acceptance, implement on a branch, verify behavior, Codex adversarial review, human judgment, open PR, human merge gate; revise returns to scope" width="100%" />
+</p>
 
 <p align="center"><sub>Tools propose and critique. I verify and decide.</sub></p>
 
@@ -75,19 +46,9 @@ flowchart TB
 
 Useful observations become evidence-backed claims before they guide implementation.
 
-```mermaid
-flowchart TB
-  A["Observe evidence<br/>research · field feedback · review"]
-  B["Normalize a claim<br/>evidence · use · risk"]
-  C["Record decision context<br/>docs · ADRs"]
-  D["Define scope and acceptance<br/>Issue · criteria"]
-  E["Implement on a branch<br/>scoped changes"]
-  F["Verify behavior<br/>tests · build · hands-on"]
-  G["Evaluate the outcome<br/>promote · revise · reject"]
-
-  A --> B --> C --> D --> E --> F --> G
-  G -. informs the next claim .-> B
-```
+<p align="center">
+  <img src="assets/diagrams/how-knowledge.png" alt="How knowledge compounds: observe evidence, normalize a claim, record decision context, define scope and acceptance, implement on a branch, verify behavior, evaluate outcome; outcome informs the next claim" width="100%" />
+</p>
 
 <p align="center"><sub>Useful observations become evidence-backed claims; outcomes decide what survives. Decisions move into repository docs when they affect a product. Chat is draft, not source of truth.</sub></p>
 
@@ -95,13 +56,9 @@ flowchart TB
 
 Claude Code is the implementer in the repository — not the product owner.
 
-| | |
-|---|---|
-| **Reads** | Issue, acceptance criteria, project rules, and relevant docs |
-| **Does** | Implements scoped changes on a branch and runs available checks (`tests` · `build`) |
-| **Does not own** | Product scope, review judgment, or the merge decision |
-
-Then: **Codex** adversarial review → **I** keep or reject findings → **PR** → **human merge gate** (`I merge or revise`).
+<p align="center">
+  <img src="assets/diagrams/how-claude.png" alt="Claude Code reads Issue and docs, implements on a branch and runs checks, then Codex review, human judgment, PR, and human merge gate" width="100%" />
+</p>
 
 <p align="center"><sub>Claude Code implements scoped changes; I own product decisions, review judgment, and merge.</sub></p>
 

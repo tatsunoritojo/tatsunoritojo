@@ -1,0 +1,11 @@
+flowchart TB
+  A["Observe evidence<br/>research · field feedback · review"]
+  B["Normalize a claim<br/>evidence · use · risk"]
+  C["Record decision context<br/>docs · ADRs"]
+  D["Define scope and acceptance<br/>Issue · criteria"]
+  E["Implement on a branch<br/>scoped changes"]
+  F["Verify behavior<br/>tests · build · hands-on"]
+  G["Evaluate the outcome<br/>promote · revise · reject"]
+
+  A --> B --> C --> D --> E --> F --> G
+  G -. informs the next claim .-> B

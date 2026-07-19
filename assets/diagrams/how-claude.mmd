@@ -1,0 +1,13 @@
+flowchart TB
+  R["Reads<br/>Issue · acceptance · project rules · relevant docs"]
+  D["Does<br/>scoped branch changes · tests · build"]
+  N["Does not own<br/>product scope · review judgment · merge"]
+  R --> D --> X["Codex adversarial review"]
+  X --> H["I keep or reject"]
+  H --> P["PR · human merge gate"]
+  classDef human fill:#14532d,stroke:#166534,color:#f0fdf4
+  classDef work fill:#ffffff,stroke:#94a3b8,color:#0f172a
+  classDef no fill:#fef2f2,stroke:#f87171,color:#0f172a
+  class H,P human
+  class R,D work
+  class N no
