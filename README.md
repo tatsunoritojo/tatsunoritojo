@@ -37,7 +37,7 @@
 One change at a time — not generated end-to-end in a single pass.
 
 <p align="center">
-  <img src="assets/diagrams/how-i-ship.svg" alt="How I ship in eight deliberate steps: 1 Frame the change with ChatGPT, 2 Define scope and acceptance via Issue and docs, 3 Implement on a branch with Claude Code, 4 Verify behavior with tests build and hands-on checks, 5 Codex adversarial review against Issue scope, 6 Human judgment keep or reject findings, 7 Open pull request linking the Issue, 8 Human merge gate where ChatGPT reviews and I merge or revise. Revise returns to Issue scope. Tools propose and critique; I verify and decide." width="100%" />
+  <img src="assets/diagrams/how-i-ship.png" alt="How I ship in eight deliberate steps: 1 Frame the change with ChatGPT, 2 Define scope and acceptance via Issue and docs, 3 Implement on a branch with Claude Code, 4 Verify behavior with tests build and hands-on checks, 5 Codex adversarial review against Issue scope, 6 Human judgment keep or reject findings, 7 Open pull request linking the Issue, 8 Human merge gate where ChatGPT reviews and I merge or revise. Revise returns to Issue scope. Tools propose and critique; I verify and decide." width="100%" />
 </p>
 
 <p align="center"><sub>Tools propose and critique. I verify and decide. Revise returns to the Issue — not a full rewrite from zero.</sub></p>
