@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Patrick+Hand&display=swap" rel="stylesheet"/>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    width: 740px;
+    padding: 16px 18px 12px;
+    background: #fffef8;
+    font-family: "Patrick Hand", "Comic Sans MS", cursive;
+    color: #1c1917;
+  }
+  h1 {
+    text-align: center;
+    font-family: "Caveat", cursive;
+    font-size: 38px;
+    font-weight: 700;
+    line-height: 1.05;
+  }
+  .tag {
+    text-align: center;
+    font-size: 13.5px;
+    color: #57534e;
+    margin: 3px 0 8px;
+  }
+  .legend {
+    display: flex;
+    justify-content: center;
+    gap: 7px;
+    flex-wrap: wrap;
+    margin-bottom: 4px;
+    font-size: 12px;
+  }
+  .legend span {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 2px 9px 3px;
+    border-radius: 999px;
+    border: 1.5px solid;
+  }
+  .legend .capture { background: #ccfbf1; border-color: #0f766e; color: #115e59; }
+  .legend .decide { background: #dcfce7; border-color: #166534; color: #14532d; }
+  .legend .build { background: #e0e7ff; border-color: #4338ca; color: #312e81; }
+  .legend .learn { background: #ffedd5; border-color: #c2410c; color: #9a3412; }
+  .legend i { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+  .homes {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px 14px;
+    font-size: 12px;
+    color: #57534e;
+    margin: 4px 0 8px;
+    line-height: 1.35;
+  }
+  .homes .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 3px 10px 4px 6px;
+    border-radius: 999px;
+    border: 1.5px solid #d6d3d1;
+    background: #fff;
+  }
+  .homes .chip img {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+    display: block;
+  }
+  .homes .chip strong { color: #1c1917; font-weight: 700; }
+  canvas { display: block; margin: 0 auto; }
+  .foot {
+    text-align: center;
+    font-size: 13px;
+    color: #44403c;
+    margin-top: 8px;
+    line-height: 1.4;
+  }
+  .foot em { font-style: normal; color: #b45309; font-weight: 700; }
+</style>
+</head>
+<body>
+  <h1>How knowledge compounds</h1>
+  <p class="tag">chat is draft · claims need evidence · outcomes decide what survives</p>
+  <div class="legend">
+    <span class="capture"><i style="background:#0f766e"></i>Capture</span>
+    <span class="decide"><i style="background:#166534"></i>Decide</span>
+    <span class="build"><i style="background:#4338ca"></i>Build</span>
+    <span class="learn"><i style="background:#c2410c"></i>Learn</span>
+  </div>
+  <div class="homes">
+    <span class="chip">
+      <img src="logos/obsidian.png" alt="" width="18" height="18"/>
+      <span><strong>Obsidian</strong> — claims &amp; judgment notes</span>
+    </span>
+    <span class="chip">
+      <img src="logos/github.png" alt="" width="18" height="18"/>
+      <span><strong>GitHub Issue</strong> — scopes the change</span>
+    </span>
+    <span class="chip">
+      <img src="logos/git.png" alt="" width="18" height="18"/>
+      <span><strong>repo docs/ADR</strong> — product truth</span>
+    </span>
+  </div>
+  <canvas id="c"></canvas>
+  <p class="foot">Useful observations become evidence-backed claims.
+  · <em>learn → next claim</em> (in the vault — not every outcome graduates)</p>
+  <script src="https://unpkg.com/roughjs@4.6.6/bundled/rough.js"></script>
+  <script>
+    /*
+      Self-review (round 1–3) — where tools live
+
+      Round 1 — gap
+        Draft diagram never named Obsidian or GitHub Issue.
+        README already says: chat ≠ SSOT; product decisions → repo docs;
+        ship loop is Issue-scoped. Vault protocol: claims live in Obsidian.
+
+      Round 2 — map (public-safe, no overclaim)
+        Obsidian  → CAPTURE (1–2) and LEARN feedback into claims
+                    personal/judgment notes may also sit here before
+                    they graduate to repo docs
+        repo docs/ADR → DECIDE step 3 when a product is affected
+        GitHub Issue → DECIDE step 4: scope & acceptance (control plane
+                       into How I ship / implementation)
+        branch/PR    → BUILD (5–6); detail lives in How I ship
+
+      Round 3 — wording discipline
+        - Don't say "all knowledge in Obsidian" or "all repos SSOT"
+        - Separate Spec/docs from Issue (Codex axis review)
+        - "when it matters" / "when it ships as product truth"
+
+      Flow:
+        1 Observe  →  2 Claim (Obsidian)
+        3 Record decision (docs/ADR if product)
+        4 Scope via GitHub Issue
+        5 Implement → 6 Verify
+        7 Outcome  ──learn──▶ 2 (vault claim updates)
+    */
+    const steps = [
+      {
+        n: 1, title: 'Observe evidence',
+        sub: 'research · field feedback · review',
+        home: '', stage: 'capture',
+      },
+      {
+        n: 2, title: 'Normalize a claim',
+        sub: 'evidence · use · risk',
+        home: '→ Obsidian', stage: 'capture',
+      },
+      {
+        n: 3, title: 'Record decision context',
+        sub: 'docs · ADRs when product is affected',
+        home: '→ repo', stage: 'decide',
+      },
+      {
+        n: 4, title: 'Define scope & acceptance',
+        sub: 'criteria · one change at a time',
+        home: '→ GitHub Issue', stage: 'decide',
+      },
+      {
+        n: 5, title: 'Implement on a branch',
+        sub: 'scoped changes (see How I ship)',
+        home: '', stage: 'build',
+      },
+      {
+        n: 6, title: 'Verify behavior',
+        sub: 'tests · build · hands-on',
+        home: '', stage: 'build',
+      },
+      {
+        n: 7, title: 'Evaluate the outcome',
+        sub: 'promote · revise · reject',
+        home: '', stage: 'learn', final: true,
+      },
+    ];
+
+    const stageColor = {
+      capture: { fill: '#ccfbf1', stroke: '#0f766e', num: '#0f766e' },
+      decide:  { fill: '#dcfce7', stroke: '#166534', num: '#166534' },
+      build:   { fill: '#e0e7ff', stroke: '#4338ca', num: '#4338ca' },
+      learn:   { fill: '#ffedd5', stroke: '#c2410c', num: '#c2410c' },
+      final:   {
+        fill: '#9a3412', stroke: '#9a3412',
+        numBg: '#fed7aa', numFg: '#9a3412',
+        title: '#fff7ed', sub: '#fed7aa',
+      },
+    };
+
+    const FONT = '"Patrick Hand", "Comic Sans MS", cursive';
+    const ROUGH = 1.0, BOW = 0.7;
+    const INK = '#44403c';
+    const LEARN = '#c2410c';
+    const HOME = '#57534e';
+
+    // Slightly taller cards for home line
+    const CW = 258, CH = 62, GX = 28, GY = 38;
+    const RW = CW * 2 + GX;
+    const SIDE = 46;
+    const FB = 54;
+    const W = SIDE + RW + FB + 14;
+    const TOP = 16;
+    const H = TOP + CH * 4 + GY * 3 + 24;
+
+    const L = SIDE;
+    const dpr = 3;
+
+    const canvas = document.getElementById('c');
+    canvas.width = W * dpr;
+    canvas.height = H * dpr;
+    canvas.style.width = W + 'px';
+    canvas.style.height = H + 'px';
+    const ctx = canvas.getContext('2d');
+    ctx.scale(dpr, dpr);
+    ctx.fillStyle = '#fffef8';
+    ctx.fillRect(0, 0, W, H);
+    const rc = rough.canvas(canvas);
+
+    function drawCard(x, y, w, h, step) {
+      const c = step.final ? stageColor.final : stageColor[step.stage];
+      rc.rectangle(x, y, w, h, {
+        roughness: ROUGH, bowing: BOW,
+        stroke: c.stroke, strokeWidth: step.final ? 2.0 : 1.4,
+        fill: c.fill, fillStyle: 'solid',
+      });
+      const numBg = step.final ? c.numBg : c.num;
+      const numFg = step.final ? c.numFg : '#fff';
+      rc.circle(x + 18, y + h / 2, 22, {
+        roughness: 0.9, stroke: numBg, fill: numBg, fillStyle: 'solid', strokeWidth: 1.0,
+      });
+      ctx.fillStyle = numFg;
+      ctx.font = '700 14px ' + FONT;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(String(step.n), x + 18, y + h / 2 + 0.5);
+
+      ctx.textAlign = 'left';
+      ctx.textBaseline = 'alphabetic';
+      ctx.fillStyle = step.final ? c.title : '#1c1917';
+      ctx.font = '600 15px ' + FONT;
+      ctx.fillText(step.title, x + 38, y + 20);
+      ctx.fillStyle = step.final ? c.sub : '#57534e';
+      ctx.font = '12.5px ' + FONT;
+      ctx.fillText(step.sub, x + 38, y + 36);
+      if (step.home) {
+        ctx.fillStyle = step.final ? '#fdba74' : '#0f766e';
+        if (step.stage === 'decide') ctx.fillStyle = '#166534';
+        if (step.stage === 'build') ctx.fillStyle = '#4338ca';
+        ctx.font = '700 12px ' + FONT;
+        ctx.fillText(step.home, x + 38, y + 52);
+      }
+      return { x, y, w, h, cx: x + w / 2, cy: y + h / 2, x2: x + w, y2: y + h };
+    }
+
+    function line(x1, y1, x2, y2, stroke, width, dash) {
+      const o = { roughness: 0.9, stroke, strokeWidth: width || 1.4 };
+      if (dash) o.strokeLineDash = dash;
+      rc.line(x1, y1, x2, y2, o);
+    }
+    function head(x, y, ang, stroke) {
+      const len = 6;
+      const a1 = ang + Math.PI * 0.78, a2 = ang - Math.PI * 0.78;
+      rc.linearPath([
+        [x + Math.cos(a1) * len, y + Math.sin(a1) * len],
+        [x, y],
+        [x + Math.cos(a2) * len, y + Math.sin(a2) * len],
+      ], { roughness: 0.5, stroke, strokeWidth: 1.3 });
+    }
+    function hArrow(x1, y, x2, stroke) {
+      line(x1, y, x2, y, stroke);
+      head(x2, y, x2 >= x1 ? 0 : Math.PI, stroke);
+    }
+    function vArrow(x, y1, y2, stroke) {
+      line(x, y1, x, y2, stroke);
+      head(x, y2, y2 >= y1 ? Math.PI / 2 : -Math.PI / 2, stroke);
+    }
+    function zoneLabel(x, y, text, color) {
+      ctx.fillStyle = color;
+      ctx.font = '700 12px ' + FONT;
+      ctx.textAlign = 'left';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(text, x, y);
+    }
+
+    function loadImage(src) {
+      return new Promise((resolve) => {
+        const img = new Image();
+        img.onload = () => resolve(img);
+        img.onerror = () => resolve(null);
+        img.src = src;
+      });
+    }
+
+    function drawLogo(img, x, y, size) {
+      if (!img) return;
+      // clip to circle badge on cream so mark reads clean
+      ctx.save();
+      ctx.beginPath();
+      ctx.arc(x + size / 2, y + size / 2, size / 2 + 1, 0, Math.PI * 2);
+      ctx.closePath();
+      ctx.clip();
+      ctx.fillStyle = '#fffef8';
+      ctx.fillRect(x - 1, y - 1, size + 2, size + 2);
+      ctx.drawImage(img, x, y, size, size);
+      ctx.restore();
+      // soft ring
+      rc.circle(x + size / 2, y + size / 2, size + 4, {
+        roughness: 0.8, stroke: '#d6d3d1', strokeWidth: 1.0, fill: 'transparent',
+      });
+    }
+
+    async function main() {
+      try {
+        await Promise.all([
+          document.fonts.load('700 38px Caveat'),
+          document.fonts.load('600 15px Patrick Hand'),
+          document.fonts.load('13px Patrick Hand'),
+          document.fonts.load('700 14px Patrick Hand'),
+          document.fonts.load('700 12px Patrick Hand'),
+        ]);
+      } catch (e) {}
+
+      const [logoObsidian, logoGithub, logoGit] = await Promise.all([
+        loadImage('logos/obsidian.png'),
+        loadImage('logos/github.png'),
+        loadImage('logos/git.png'),
+      ]);
+
+      const y0 = TOP;
+      const y1 = y0 + CH + GY;
+      const y2 = y1 + CH + GY;
+      const y3 = y2 + CH + GY;
+
+      function band(y, h, fill) {
+        rc.rectangle(L - 10, y - 8, RW + 20, h + 16, {
+          roughness: 1.1, bowing: 0.5, stroke: 'transparent',
+          fill, fillStyle: 'solid',
+        });
+      }
+      band(y0, CH, '#f0fdfa');
+      band(y1, CH, '#f0fdf4');
+      band(y2, CH, '#eef2ff');
+
+      zoneLabel(L, y0 - 10, 'CAPTURE  ·  vault', '#0f766e');
+      zoneLabel(L, y1 - 10, 'DECIDE  ·  docs then Issue', '#166534');
+      zoneLabel(L, y2 - 10, 'BUILD  ·  repo', '#4338ca');
+      zoneLabel(L, y3 - 10, 'LEARN  ·  back to vault', '#c2410c');
+
+      const b1 = drawCard(L, y0, CW, CH, steps[0]);
+      const b2 = drawCard(L + CW + GX, y0, CW, CH, steps[1]);
+      const b3 = drawCard(L, y1, CW, CH, steps[2]);
+      const b4 = drawCard(L + CW + GX, y1, CW, CH, steps[3]);
+      const b5 = drawCard(L, y2, CW, CH, steps[4]);
+      const b6 = drawCard(L + CW + GX, y2, CW, CH, steps[5]);
+      const outW = Math.min(RW - 36, 340);
+      const b7 = drawCard(L + (RW - outW) / 2, y3, outW, CH, steps[6]);
+
+      // logos on the "home" cards (top-right of each card)
+      const logoS = 22;
+      drawLogo(logoObsidian, b2.x2 - logoS - 8, b2.y + 8, logoS);
+      drawLogo(logoGit, b3.x2 - logoS - 8, b3.y + 8, logoS);
+      drawLogo(logoGithub, b4.x2 - logoS - 8, b4.y + 8, logoS);
+      // learn returns to Obsidian claim
+      drawLogo(logoObsidian, b7.x2 - logoS - 8, b7.y + 8, logoS);
+
+      hArrow(b1.x2 + 2, b1.cy, b2.x - 2, INK);
+      hArrow(b3.x2 + 2, b3.cy, b4.x - 2, INK);
+      hArrow(b5.x2 + 2, b5.cy, b6.x - 2, INK);
+
+      // 2 claim → 3 record
+      const mid01 = (b2.y2 + b3.y) / 2;
+      line(b2.cx, b2.y2 + 1, b2.cx, mid01, INK);
+      line(b2.cx, mid01, b3.cx, mid01, INK);
+      vArrow(b3.cx, mid01, b3.y - 1, INK);
+
+      // 4 Issue → 5 implement (the control-plane handoff)
+      const mid12 = (b4.y2 + b5.y) / 2;
+      line(b4.cx, b4.y2 + 1, b4.cx, mid12, INK);
+      line(b4.cx, mid12, b5.cx, mid12, INK);
+      vArrow(b5.cx, mid12, b5.y - 1, INK);
+
+      // 6 → 7
+      const mid23 = (b6.y2 + b7.y) / 2;
+      line(b6.cx, b6.y2 + 1, b6.cx, mid23, INK);
+      line(b6.cx, mid23, b7.cx, mid23, INK);
+      vArrow(b7.cx, mid23, b7.y - 1, INK);
+
+      // learn: 7 → 2 (vault claim)
+      const fbX = L + RW + 20;
+      line(b7.x2, b7.cy, fbX, b7.cy, LEARN, 1.4, [5, 4]);
+      line(fbX, b7.cy, fbX, b2.cy, LEARN, 1.4, [5, 4]);
+      line(fbX, b2.cy, b2.x2 + 2, b2.cy, LEARN, 1.4, [5, 4]);
+      head(b2.x2 + 2, b2.cy, Math.PI, LEARN);
+
+      ctx.save();
+      ctx.fillStyle = LEARN;
+      ctx.font = '700 12px ' + FONT;
+      ctx.translate(fbX + 12, (b7.cy + b2.cy) / 2);
+      ctx.rotate(-Math.PI / 2);
+      ctx.textAlign = 'center';
+      ctx.fillText('learn → claim (Obsidian)', 0, 0);
+      ctx.restore();
+
+      document.title = 'READY';
+    }
+
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(main);
+    } else {
+      main();
+    }
+  </script>
+</body>
+</html>

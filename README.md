@@ -51,7 +51,7 @@ Tools propose and critique. I decide what ships.
 Useful observations become evidence-backed claims before they guide implementation.
 
 <p align="center">
-  <img src="assets/diagrams/how-knowledge.jpg" alt="How knowledge compounds: observe evidence, normalize a claim, record decision context, define scope and acceptance, implement on a branch, verify behavior, evaluate outcome; outcome informs the next claim" width="100%" />
+  <img src="assets/diagrams/how-knowledge-v2.png" alt="How knowledge compounds: observe evidence, normalize a claim in Obsidian, record decision context in repo docs or ADRs when product is affected, define scope via GitHub Issue, implement on a branch, verify behavior, evaluate outcome; learn returns to the next claim in the vault" width="100%" />
 </p>
 
 <p align="center"><sub>Useful observations become evidence-backed claims; outcomes decide what survives. Decisions move into repository docs when they affect a product. Chat is draft, not source of truth.</sub></p>
