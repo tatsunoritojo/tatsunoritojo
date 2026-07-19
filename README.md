@@ -1,9 +1,8 @@
 <!--
   Mobile-first profile surface:
   - one wide banner so Start here stays near first scroll
-  - no multi-column galleries; pin banner is looping WebP (notes→apps)
-  Banner still: assets/pin-banner.jpg (= variations/05-flat-split)
-  Banner loop: assets/pin-banner-loop.webp
+  - no multi-column galleries, no autoplay video
+  Banner: assets/pin-banner.jpg (= variations/05-flat-split)
   Alts: assets/alt-01-geometric.jpg, assets/alt-07-washi-ink.jpg
   Claims (fact-checked with owner 2026-07-18 / 2026-07-19):
   - Onedrop: built attendance/ops systems — NOT the public school website (onedrop2025.com)
@@ -14,7 +13,7 @@
   - Knowledge + Claude Code axis (Codex-reviewed 2026-07-19, request-changes applied): see 260719_profile_axis_codex_review.md
 -->
 <p align="center">
-  <img src="assets/pin-banner-loop.webp" alt="From education into software: a sticky note lifts, becomes light particles across the tear, joins a system component, then returns" width="100%" />
+  <img src="assets/pin-banner.jpg" alt="From education into software" width="100%" />
 </p>
 
 <h1 align="center">Tatsunori Tojo</h1>
