@@ -51,7 +51,7 @@ idea → plan (Issue) → build/review loop → PR → I merge → production
 
 | Role | Who / tools | Job |
 |------|-------------|-----|
-| Explore | ChatGPT | Think through the change (design chat, not a contract) |
+| Explore | ChatGPT (connected to the real repository) | Wall-bounce design using live repo context—not free-floating chat |
 | Scope | Me + **GitHub Issue** | Acceptance criteria; one change unit |
 | Implement | **Claude Code** | Work on a branch; open the PR |
 | Hard review | **Codex** | Challenge the diff against the Issue |
@@ -67,7 +67,8 @@ Diagram colors follow these roles.
 ### Plan
 
 1. **Frame the change** — ChatGPT  
-   Explore the problem and options. Still a conversation.
+   Explore the problem and options **with ChatGPT connected to the actual repository**, so the wall-bounce is grounded in real code and project structure—not abstract advice.  
+   This stage still produces options and questions, not a final contract.
 
 2. **Define scope & acceptance** — me, GitHub Issue  
    Write what “done” means. Everything after is bound to this Issue.

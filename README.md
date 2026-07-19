@@ -37,7 +37,7 @@
 Not a one-shot magic button. One change at a time.
 
 <p align="center">
-  <img src="assets/diagrams/how-i-ship-v4.png" alt="How I ship: starts from my idea, frame with ChatGPT, define Issue and acceptance, implement on a branch with Claude Code, Codex adversarial review, human judgment (revise or ready), open PR, human merge gate, then production. Loop revise returns to implement; merge-gate revise returns to the Issue. Tools propose and critique; I decide what ships." width="100%" />
+  <img src="assets/diagrams/how-i-ship-v5.png" alt="How I ship: starts from my idea, frame with repo-connected ChatGPT, define Issue and acceptance, implement on a branch with Claude Code, Codex adversarial review, human judgment (revise or ready), open PR, human merge gate, then production. Loop revise returns to implement; merge-gate revise returns to the Issue. Tools propose and critique; I decide what ships." width="100%" />
 </p>
 
 <p align="center"><sub>
