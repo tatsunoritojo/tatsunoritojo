@@ -37,11 +37,11 @@
 Not a one-shot magic button. One change at a time.
 
 <p align="center">
-  <img src="assets/diagrams/how-i-ship.png" alt="How I ship: Frame with ChatGPT, define Issue and acceptance, implement on a branch with Claude Code, verify behavior, Codex adversarial review, human judgment, open PR, human merge gate. Revise goes back to the Issue. Tools propose and critique; I verify and decide." width="100%" />
+  <img src="assets/diagrams/how-i-ship.png" alt="How I ship: Frame with ChatGPT, define Issue and acceptance, implement on a branch with Claude Code, verify behavior, Codex adversarial review, human judgment, open PR, human merge gate. Revise goes back to the Issue. Tools propose and critique; I verify and decide. Mostly." width="100%" />
 </p>
 
 <p align="center"><sub>
-Issue-scoped. Verify before review. I merge (ChatGPT can argue).<br/>
+Hand-drawn on purpose. Issue-scoped. I merge (ChatGPT can argue).<br/>
 Tools propose and critique. I verify and decide. Mostly.
 </sub></p>
 
