@@ -32,20 +32,22 @@
     justify-content: center;
     gap: 8px;
     flex-wrap: wrap;
-    margin-bottom: 2px;
+    margin-bottom: 4px;
     font-size: 12.5px;
   }
   .legend span {
     display: inline-flex;
     align-items: center;
-    gap: 5px;
-    padding: 2px 10px 3px;
+    gap: 6px;
+    padding: 3px 10px 3px 6px;
     border-radius: 999px;
     border: 1.5px solid;
   }
   .legend .claude { background: #e0e7ff; border-color: #4338ca; color: #312e81; }
   .legend .ai { background: #ccfbf1; border-color: #0f766e; color: #115e59; }
   .legend .human { background: #dcfce7; border-color: #166534; color: #14532d; }
+  .legend .gh { background: #f5f5f4; border-color: #57534e; color: #292524; }
+  .legend img { width: 16px; height: 16px; object-fit: contain; display: block; }
   .legend i { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
   canvas { display: block; margin: 0 auto; }
   .foot {
@@ -62,8 +64,9 @@
   <h1>How I ship</h1>
   <p class="tag">not one-shot · Issue-scoped · one change at a time</p>
   <div class="legend">
-    <span class="ai"><i style="background:#0f766e"></i>ChatGPT / Codex</span>
-    <span class="claude"><i style="background:#4338ca"></i>Claude Code</span>
+    <span class="ai"><img src="logos/openai.png" alt="" width="16" height="16"/>ChatGPT / Codex</span>
+    <span class="claude"><img src="logos/anthropic.png" alt="" width="16" height="16"/>Claude Code</span>
+    <span class="gh"><img src="logos/github.png" alt="" width="16" height="16"/>GitHub Issue / PR</span>
     <span class="human"><i style="background:#166534"></i>Human (me)</span>
   </div>
   <canvas id="c"></canvas>
@@ -255,6 +258,30 @@
       label(cx + 8 * s, cy + 28 * s, 'production', EXIT, 13);
     }
 
+    function loadImage(src) {
+      return new Promise((resolve) => {
+        const img = new Image();
+        img.onload = () => resolve(img);
+        img.onerror = () => resolve(null);
+        img.src = src;
+      });
+    }
+    function drawLogo(img, x, y, size) {
+      if (!img) return;
+      ctx.save();
+      ctx.beginPath();
+      ctx.arc(x + size / 2, y + size / 2, size / 2 + 1, 0, Math.PI * 2);
+      ctx.closePath();
+      ctx.clip();
+      ctx.fillStyle = '#fffef8';
+      ctx.fillRect(x - 1, y - 1, size + 2, size + 2);
+      ctx.drawImage(img, x, y, size, size);
+      ctx.restore();
+      rc.circle(x + size / 2, y + size / 2, size + 4, {
+        roughness: 0.8, stroke: '#d6d3d1', strokeWidth: 1.0, fill: 'transparent',
+      });
+    }
+
     async function main() {
       try {
         await Promise.all([
@@ -265,6 +292,12 @@
           document.fonts.load('700 12px Patrick Hand'),
         ]);
       } catch (e) {}
+
+      const [logoOpenAI, logoClaude, logoGithub] = await Promise.all([
+        loadImage('logos/openai.png'),
+        loadImage('logos/anthropic.png'),
+        loadImage('logos/github.png'),
+      ]);
 
       // ---- Y stack (even G) ----
       const yPlan = BRAIN_BAND;
@@ -330,6 +363,15 @@
       // ready exit
       vArrow(s6.cx, c5.y2 + 1, s6.y - 1, EXIT);
       label(s6.cx + 28, (c5.y2 + s6.y) / 2, 'ready', EXIT, 12);
+
+      // logos on tool-owned cards (top-right)
+      const logoS = 20;
+      drawLogo(logoOpenAI, p1.x2 - logoS - 8, p1.y + 8, logoS);      // ChatGPT
+      drawLogo(logoGithub, p2.x2 - logoS - 8, p2.y + 8, logoS);      // Issue
+      drawLogo(logoClaude, c3.x2 - logoS - 8, c3.y + 8, logoS);      // Claude Code
+      drawLogo(logoOpenAI, c4.x2 - logoS - 8, c4.y + 8, logoS);      // Codex
+      drawLogo(logoGithub, s6.x2 - logoS - 8, s6.y + 8, logoS);      // PR
+      drawLogo(logoGithub, s7.x2 - logoS - 8, s7.y + 8, logoS);      // merge on GH
 
       // ---- production under 7 ----
       vArrow(s7.cx, s7.y2 + 2, yProd - 30, EXIT);
