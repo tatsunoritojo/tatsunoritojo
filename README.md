@@ -33,9 +33,40 @@
 
 ### How I ship
 
-<p align="center">
-  <img src="assets/how-i-ship.svg" alt="How I ship: I frame the change, define an Issue and acceptance criteria, implement on a branch, verify behavior, run a Codex adversarial review, assess the findings myself, open a pull request, and make the final merge-or-revise decision after PR review." width="100%" />
-</p>
+```mermaid
+flowchart TB
+  subgraph PLAN
+    A["1 Frame the change<br/>ChatGPT · options and constraints"]
+    B["2 Define scope and acceptance<br/>Issue · docs · criteria"]
+  end
+
+  subgraph BUILD
+    C["3 Implement on a branch<br/>Claude Code · scoped changes"]
+    D["4 Verify behavior<br/>tests · build · hands-on"]
+  end
+
+  subgraph REVIEW
+    E["5 Run adversarial review<br/>Codex · diff vs scope"]
+    F["6 Apply human judgment<br/>I verify findings · keep or reject"]
+  end
+
+  subgraph SHIP
+    G["7 Open the pull request<br/>link Issue · record decisions"]
+    H["8 Human merge gate<br/>ChatGPT reviews · I merge or revise"]
+  end
+
+  A --> B --> C --> D --> E --> F --> G --> H
+  H -. revise .-> B
+
+  classDef human fill:#14532d,stroke:#166534,color:#f0fdf4
+  classDef ai fill:#f0fdfa,stroke:#0f766e,color:#0f172a
+  classDef work fill:#ffffff,stroke:#94a3b8,color:#0f172a
+  class A,C,E ai
+  class B,D,G work
+  class F,H human
+```
+
+<p align="center"><sub>Tools propose and critique. I verify and decide.</sub></p>
 
 
 <p align="center">
