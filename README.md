@@ -31,16 +31,10 @@
 
 ### How I ship
 
-A multi-agent loop with a human gate on every merge:
+<p align="center">
+  <img src="assets/how-i-ship.svg" alt="How I ship: ChatGPT designs, Claude Code implements, Codex reviews, I review, PR, ChatGPT decides merge or send back, then repeat" width="100%" />
+</p>
 
-1. **ChatGPT** — wall-bounce, framing, and design
-2. **Claude Code** — implementation
-3. **Codex** — adversarial review of that implementation
-4. **Me** — review Codex findings and decide what to keep
-5. **PR** — open the change set
-6. **ChatGPT** — PR review: send back or merge
-
-Then the cycle repeats. Tools draft and critique; I own the judgment.
 
 <p align="center">
   <sub>Public experiments live in the pin below · more at <a href="https://github.com/tatsunoritojo/pin-only">pin-only</a></sub>
