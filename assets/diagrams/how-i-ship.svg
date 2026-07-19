@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 732" width="440" height="732" role="img" aria-labelledby="t d">
+<title id="t">How I ship</title>
+<desc id="d">Frame with ChatGPT, define Issue and acceptance, implement on a branch with Claude Code, verify, Codex adversarial review, human judgment, open PR, human merge gate. Revise returns to scope definition. Tools propose; I decide.</desc>
+<rect width="440" height="732" rx="18" fill="#fafaf9"/>
+<text x="220" y="36" text-anchor="middle" font-family="ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif" font-size="22" font-weight="700" fill="#0f172a">How I ship</text>
+<text x="220" y="58" text-anchor="middle" font-family="ui-sans-serif,system-ui,sans-serif" font-size="11.5" fill="#64748b">one change at a time · Issue-scoped · human owns the merge</text>
+<text x="220" y="76" text-anchor="middle" font-family="ui-sans-serif,system-ui,sans-serif" font-size="11" fill="#94a3b8">not one-shot generation · deliberate steps</text>
+<defs>
+  <marker id="a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+    <path d="M0 0 L10 5 L0 10 z" fill="#64748b"/>
+  </marker>
+  <marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+    <path d="M0 0 L10 5 L0 10 z" fill="#d97706"/>
+  </marker>
+</defs>
+<text x="16" y="112" font-family="ui-sans-serif,system-ui,sans-serif" font-size="10" font-weight="700" fill="#0f766e" letter-spacing="0.08em">PLAN</text>
+<rect x="72" y="96" width="344" height="58" rx="12" fill="#f0fdfa" stroke="#5eead4" stroke-width="1.5"/>
+<circle cx="96" cy="125" r="13" fill="#0f766e"/>
+<text x="96" y="129" text-anchor="middle" font-family="ui-sans-serif,system-ui,sans-serif" font-size="12" font-weight="700" fill="#ffffff">1</text>
+<text x="118" y="120" font-family="ui-sans-serif,system-ui,sans-serif" font-size="14" font-weight="700" fill="#0f172a">Frame the change</text>
+<text x="118" y="138" font-family="ui-sans-serif,system-ui,sans-serif" font-size="11" fill="#64748b">ChatGPT · wall-bounce & design</text>
+<rect x="72" y="166" width="344" height="58" rx="12" fill="#f0fdfa" stroke="#5eead4" stroke-width="1.5"/>
+<circle cx="96" cy="195" r="13" fill="#0f766e"/>
+<text x="96" y="199" text-anchor="middle" font-family="ui-sans-serif,system-ui,sans-serif" font-size="12" font-weight="700" fill="#ffffff">2</text>
+<text x="118" y="190" font-family="ui-sans-serif,system-ui,sans-serif" font-size="14" font-weight="700" fill="#0f172a">Define scope & acceptance</text>
+<text x="118" y="208" font-family="ui-sans-serif,system-ui,sans-serif" font-size="11" fill="#64748b">Issue · docs · criteria</text>
+<text x="16" y="252" font-family="ui-sans-serif,system-ui,sans-serif" font-size="10" font-weight="700" fill="#4338ca" letter-spacing="0.08em">BUILD</text>
+<rect x="72" y="236" width="344" height="58" rx="12" fill="#eef2ff" stroke="#a5b4fc" stroke-width="1.5"/>
+<circle cx="96" cy="265" r="13" fill="#4338ca"/>
+<text x="96" y="269" text-anchor="middle" font-family="ui-sans-serif,system-ui,sans-serif" font-size="12" font-weight="700" fill="#ffffff">3</text>
+<text x="118" y="260" font-family="ui-sans-serif,system-ui,sans-serif" font-size="14" font-weight="700" fill="#0f172a">Implement on a branch</text>
+<text x="118" y="278" font-family="ui-sans-serif,system-ui,sans-serif" font-size="11" fill="#64748b">Claude Code · scoped only</text>
+<rect x="72" y="306" width="344" height="58" rx="12" fill="#eef2ff" stroke="#a5b4fc" stroke-width="1.5"/>
+<circle cx="96" cy="335" r="13" fill="#4338ca"/>
+<text x="96" y="339" text-anchor="middle" font-family="ui-sans-serif,system-ui,sans-serif" font-size="12" font-weight="700" fill="#ffffff">4</text>
+<text x="118" y="330" font-family="ui-sans-serif,system-ui,sans-serif" font-size="14" font-weight="700" fill="#0f172a">Verify behavior</text>
+<text x="118" y="348" font-family="ui-sans-serif,system-ui,sans-serif" font-size="11" fill="#64748b">tests · build · hands-on</text>
+<text x="16" y="392" font-family="ui-sans-serif,system-ui,sans-serif" font-size="10" font-weight="700" fill="#b45309" letter-spacing="0.08em">REVIEW</text>
+<rect x="72" y="376" width="344" height="58" rx="12" fill="#fffbeb" stroke="#fcd34d" stroke-width="1.5"/>
+<circle cx="96" cy="405" r="13" fill="#b45309"/>
+<text x="96" y="409" text-anchor="middle" font-family="ui-sans-serif,system-ui,sans-serif" font-size="12" font-weight="700" fill="#ffffff">5</text>
+<text x="118" y="400" font-family="ui-sans-serif,system-ui,sans-serif" font-size="14" font-weight="700" fill="#0f172a">Adversarial review</text>
+<text x="118" y="418" font-family="ui-sans-serif,system-ui,sans-serif" font-size="11" fill="#64748b">Codex · diff vs Issue scope</text>
+<rect x="72" y="446" width="344" height="58" rx="12" fill="#fffbeb" stroke="#fcd34d" stroke-width="1.5"/>
+<circle cx="96" cy="475" r="13" fill="#b45309"/>
+<text x="96" y="479" text-anchor="middle" font-family="ui-sans-serif,system-ui,sans-serif" font-size="12" font-weight="700" fill="#ffffff">6</text>
+<text x="118" y="470" font-family="ui-sans-serif,system-ui,sans-serif" font-size="14" font-weight="700" fill="#0f172a">Human judgment</text>
+<text x="118" y="488" font-family="ui-sans-serif,system-ui,sans-serif" font-size="11" fill="#64748b">I keep / reject findings</text>
+<text x="16" y="532" font-family="ui-sans-serif,system-ui,sans-serif" font-size="10" font-weight="700" fill="#166534" letter-spacing="0.08em">SHIP</text>
+<rect x="72" y="516" width="344" height="58" rx="12" fill="#f0fdf4" stroke="#86efac" stroke-width="1.5"/>
+<circle cx="96" cy="545" r="13" fill="#166534"/>
+<text x="96" y="549" text-anchor="middle" font-family="ui-sans-serif,system-ui,sans-serif" font-size="12" font-weight="700" fill="#ffffff">7</text>
+<text x="118" y="540" font-family="ui-sans-serif,system-ui,sans-serif" font-size="14" font-weight="700" fill="#0f172a">Open pull request</text>
+<text x="118" y="558" font-family="ui-sans-serif,system-ui,sans-serif" font-size="11" fill="#64748b">link Issue · record decisions</text>
+<rect x="72" y="586" width="344" height="58" rx="12" fill="#14532d" stroke="#166534" stroke-width="2.5"/>
+<circle cx="96" cy="615" r="13" fill="#bbf7d0"/>
+<text x="96" y="619" text-anchor="middle" font-family="ui-sans-serif,system-ui,sans-serif" font-size="12" font-weight="700" fill="#14532d">8</text>
+<text x="118" y="610" font-family="ui-sans-serif,system-ui,sans-serif" font-size="14" font-weight="700" fill="#f0fdf4">Human merge gate</text>
+<text x="118" y="628" font-family="ui-sans-serif,system-ui,sans-serif" font-size="11" fill="#bbf7d0">ChatGPT reviews · I merge or revise</text>
+<g stroke="#64748b" stroke-width="1.8" fill="none" marker-end="url(#a)">
+  <path d="M244 154 V166"/>
+  <path d="M244 224 V236"/>
+  <path d="M244 294 V306"/>
+  <path d="M244 364 V376"/>
+  <path d="M244 434 V446"/>
+  <path d="M244 504 V516"/>
+  <path d="M244 574 V586"/>
+</g>
+<path d="M416 615 H436 V195 H416" fill="none" stroke="#d97706" stroke-width="1.8" stroke-dasharray="4 3" marker-end="url(#ar)"/>
+<text x="428" y="405.0" text-anchor="middle" transform="rotate(90 428 405.0)" font-family="ui-sans-serif,system-ui,sans-serif" font-size="10" font-weight="700" fill="#d97706">revise → Issue</text>
+<text x="220" y="696" text-anchor="middle" font-family="ui-sans-serif,system-ui,sans-serif" font-size="11.5" fill="#0f172a">Not one-shot: scope before code · verify before review · human merges</text>
+<text x="220" y="716" text-anchor="middle" font-family="ui-sans-serif,system-ui,sans-serif" font-size="11" fill="#64748b">Tools propose and critique. I verify and decide.</text>
+</svg>
