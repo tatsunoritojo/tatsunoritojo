@@ -14,7 +14,7 @@
   - Knowledge + Claude Code axis (Codex-reviewed 2026-07-19, request-changes applied): see 260719_profile_axis_codex_review.md
 -->
 <p align="center">
-  <img src="assets/pin-banner-loop.webp" alt="From education into software: sticky notes arrive from the left, stick, then transform into apps and data on the right" width="100%" />
+  <img src="assets/pin-banner-loop.webp" alt="From education into software: a sticky note lifts, becomes light particles across the tear, joins a system component, then returns" width="100%" />
 </p>
 
 <h1 align="center">Tatsunori Tojo</h1>
