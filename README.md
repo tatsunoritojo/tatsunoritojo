@@ -42,7 +42,8 @@ Not a one-shot magic button. One change at a time.
 
 <p align="center"><sub>
 Hand-drawn on purpose. Issue-scoped. I merge (ChatGPT can argue).<br/>
-Tools propose and critique. I decide what ships.
+Tools propose and critique. I decide what ships.<br/>
+<a href="docs/how-i-ship.md">Read the full process →</a>
 </sub></p>
 
 
@@ -54,7 +55,9 @@ Useful observations become evidence-backed claims before they guide implementati
   <img src="assets/diagrams/how-knowledge-v2.png" alt="How knowledge compounds: observe evidence, normalize a claim in Obsidian, record decision context in repo docs or ADRs when product is affected, define scope via GitHub Issue, implement on a branch, verify behavior, evaluate outcome; learn returns to the next claim in the vault" width="100%" />
 </p>
 
-<p align="center"><sub>Useful observations become evidence-backed claims; outcomes decide what survives. Decisions move into repository docs when they affect a product. Chat is draft, not source of truth.</sub></p>
+<p align="center"><sub>Useful observations become evidence-backed claims; outcomes decide what survives. Decisions move into repository docs when they affect a product. Chat is draft, not source of truth.<br/>
+<a href="docs/how-knowledge.md">Read the full process →</a>
+</sub></p>
 
 ### How Claude Code works here
 
@@ -64,7 +67,9 @@ Claude Code is the implementer in the repository — not the product owner.
   <img src="assets/diagrams/how-claude-v4.png" alt="How Claude Code works here: reads Issue and docs, does scoped branch changes with tests and build, does not own product scope or merge; after implement, Codex review, human judgment, Claude opens PR, then human merge gate" width="100%" />
 </p>
 
-<p align="center"><sub>Claude Code implements scoped changes; I own product decisions, review judgment, and merge.</sub></p>
+<p align="center"><sub>Claude Code implements scoped changes; I own product decisions, review judgment, and merge.<br/>
+<a href="docs/how-claude.md">Read the full process →</a>
+</sub></p>
 
 
 <p align="center">
