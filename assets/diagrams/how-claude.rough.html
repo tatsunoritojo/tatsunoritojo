@@ -8,7 +8,7 @@
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
-    width: 740px;
+    width: 800px;
     padding: 16px 18px 12px;
     background: #fffef8;
     font-family: "Patrick Hand", "Comic Sans MS", cursive;
@@ -104,12 +104,11 @@
       plain:  { fill: '#fafaf9', stroke: '#78716c', num: '#57534e' },
     };
 
-    // Canvas geometry
-    const W = 700, H = 420;
+    // Canvas geometry — wide enough for 4-step after-implement rail
+    const W = 760, H = 430;
     const dpr = 3;
-    const L = 40;
+    const L = 36;
     const CW = 200, CH = 72, GX = 22;
-    const RW = CW * 3 + GX * 2; // 644 — tight; use 3 cards of ~190
 
     const canvas = document.getElementById('c');
     canvas.width = W * dpr;
@@ -248,43 +247,52 @@
       drawLogo(logoClaude, does.x2 - logoS - 8, does.y + 8, logoS);
       // no logo on DOES NOT OWN — human
 
-      // ---- Row 2: after implement — gates (Codex then human then PR) ----
+      // ---- Row 2: after implement — same order as How I ship ----
+      // Codex → human judgment → Open PR (Claude) → I merge (human)
       const y2 = y1 + cardH + 56;
       zoneLabel(x0, y2 - 14, 'AFTER IMPLEMENT  (same order as How I ship)', '#57534e');
 
+      const gW = 155, gH = 78;
+      const gGap = 16;
+      const gRowW = gW * 4 + gGap * 3;
+      const gx0 = (W - gRowW) / 2;
+
       // soft rail band
-      rc.rectangle(x0 - 12, y2 - 10, rowW + 24, 100, {
+      rc.rectangle(gx0 - 12, y2 - 10, gRowW + 24, 100, {
         roughness: 1.1, bowing: 0.5, stroke: 'transparent',
         fill: '#f5f5f4', fillStyle: 'solid',
       });
 
-      const gW = 190, gH = 78;
-      const gGap = 28;
-      const gRowW = gW * 3 + gGap * 2;
-      const gx0 = (W - gRowW) / 2;
-
       const codex = drawCard(gx0, y2, gW, gH, {
         color: colors.ai,
         title: 'Codex review',
-        lines: ['adversarial · vs Issue'],
+        lines: ['adversarial', 'vs Issue'],
       });
       const judge = drawCard(gx0 + gW + gGap, y2, gW, gH, {
         color: colors.human,
         title: 'Human judgment',
         lines: ['I keep or reject'],
       });
-      const merge = drawCard(gx0 + (gW + gGap) * 2, y2, gW, gH, {
+      // Open PR = Claude (not the human merge gate)
+      const openPr = drawCard(gx0 + (gW + gGap) * 2, y2, gW, gH, {
+        color: colors.claude,
+        title: 'Open PR',
+        lines: ['Claude Code', 'link Issue'],
+      });
+      const merge = drawCard(gx0 + (gW + gGap) * 3, y2, gW, gH, {
         color: colors.gate,
         heavy: true,
-        title: 'PR · I merge',
-        lines: ['human merge gate'],
+        title: 'I merge',
+        lines: ['human gate only'],
       });
 
       hArrow(codex.x2 + 2, codex.cy, judge.x - 2, INK);
-      hArrow(judge.x2 + 2, judge.cy, merge.x - 2, '#166534');
+      hArrow(judge.x2 + 2, judge.cy, openPr.x - 2, INK);
+      hArrow(openPr.x2 + 2, openPr.cy, merge.x - 2, '#166534');
 
-      drawLogo(logoOpenAI, codex.x2 - logoS - 8, codex.y + 8, logoS);
-      drawLogo(logoGithub, merge.x2 - logoS - 8, merge.y + 8, logoS);
+      drawLogo(logoOpenAI, codex.x2 - logoS - 6, codex.y + 8, logoS);
+      drawLogo(logoClaude, openPr.x2 - logoS - 6, openPr.y + 8, logoS);
+      drawLogo(logoGithub, merge.x2 - logoS - 6, merge.y + 8, logoS);
 
       // DOES drops into Codex
       vArrow(does.cx, does.y2 + 2, y2 - 4, colors.claude.num);
@@ -293,11 +301,11 @@
       ctx.textAlign = 'center';
       ctx.fillText('then review', does.cx + 36, (does.y2 + y2) / 2);
 
-      // subtle note under DOES NOT OWN linking to gates
+      // subtle note under DOES NOT OWN linking to human gates
       ctx.fillStyle = '#78716c';
       ctx.font = '11px ' + FONT;
       ctx.textAlign = 'center';
-      ctx.fillText('owned below ↓', notOwn.cx, notOwn.y2 + 14);
+      ctx.fillText('judgment · merge ↓', notOwn.cx, notOwn.y2 + 14);
 
       document.title = 'READY';
     }

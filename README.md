@@ -61,7 +61,7 @@ Useful observations become evidence-backed claims before they guide implementati
 Claude Code is the implementer in the repository — not the product owner.
 
 <p align="center">
-  <img src="assets/diagrams/how-claude-v2.png" alt="How Claude Code works here: reads Issue and docs, does scoped branch changes with tests and build, does not own product scope or merge; after implement, Codex adversarial review, human judgment, then PR and human merge gate" width="100%" />
+  <img src="assets/diagrams/how-claude-v3.png" alt="How Claude Code works here: reads Issue and docs, does scoped branch changes with tests and build, does not own product scope or merge; after implement, Codex review, human judgment, Claude opens PR, then human merge gate" width="100%" />
 </p>
 
 <p align="center"><sub>Claude Code implements scoped changes; I own product decisions, review judgment, and merge.</sub></p>
