@@ -7,8 +7,9 @@
   Claims (fact-checked with owner 2026-07-18 / 2026-07-19):
   - Onedrop: built attendance/ops systems — NOT the public school website (onedrop2025.com)
   - Kodomo Shinro pair: commissioned by Onedrop — site + diagnostic (2 products)
-  - Dev loop (scraped 2026-07-19): ChatGPT design → Issue (control/acceptance) → Claude Code on branch → Codex review → human → PR → ChatGPT merge/return gate
-  - Evidence: onedrop/WORKFLOW.md (Issue with acceptance → branch → impl → PR; Codex pre-PR; human merge); owner: wall-bounce then Issue-driven; ChatGPT PR gate
+  - Dev loop (Codex-reviewed 2026-07-19, VERDICT request-changes applied):
+    Frame → Define Issue/docs/acceptance → Implement (Claude Code) → Verify → Codex review → Human judgment → PR → Human merge gate (ChatGPT assists; I merge/revise)
+  - Evidence: onedrop/WORKFLOW.md; 260719_how_i_ship_codex_review.md
 -->
 <p align="center">
   <img src="assets/pin-banner.jpg" alt="From education into software" width="100%" />
@@ -33,7 +34,7 @@
 ### How I ship
 
 <p align="center">
-  <img src="assets/how-i-ship.svg" alt="How I ship: ChatGPT wall-bounce and design, Issue controls work, Claude Code implements, Codex reviews, I review, PR, ChatGPT decides merge or send back, then repeat" width="100%" />
+  <img src="assets/how-i-ship.svg" alt="How I ship: I frame the change, define an Issue and acceptance criteria, implement on a branch, verify behavior, run a Codex adversarial review, assess the findings myself, open a pull request, and make the final merge-or-revise decision after PR review." width="100%" />
 </p>
 
 
