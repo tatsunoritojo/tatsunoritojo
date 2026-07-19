@@ -10,6 +10,7 @@
   - Dev loop (Codex-reviewed 2026-07-19, VERDICT request-changes applied):
     Frame → Define Issue/docs/acceptance → Implement (Claude Code) → Verify → Codex review → Human judgment → PR → Human merge gate (ChatGPT assists; I merge/revise)
   - Evidence: onedrop/WORKFLOW.md; 260719_how_i_ship_codex_review.md
+  - Knowledge axis (public-safe): research→claim→spec/ADR→implement→outcome; second brain + per-repo SSOT; Claude Code = implementer not owner (WORKFLOW 3-actor + vault claim protocol)
 -->
 <p align="center">
   <img src="assets/pin-banner.jpg" alt="From education into software" width="100%" />
@@ -67,6 +68,62 @@ flowchart TB
 ```
 
 <p align="center"><sub>Tools propose and critique. I verify and decide.</sub></p>
+
+
+
+### How knowledge compounds
+
+Not a pile of chat logs. Research and field work are normalized before they touch code.
+
+```mermaid
+flowchart LR
+  R["Observe<br/>research · field notes · review"]
+  C["Claim<br/>evidence · use · risk · handoff"]
+  S["Spec<br/>Issue · docs · ADR"]
+  I["Implement<br/>branch · verify"]
+  O["Outcome<br/>promote · revise · reject"]
+
+  R --> C --> S --> I --> O
+  O -. feeds next claim .-> C
+```
+
+<p align="center"><sub>Second brain for durable claims · per-repo docs/ADRs for product truth · chat is draft, not source of truth</sub></p>
+
+### How Claude Code works here
+
+Claude Code is the implementer in the repo — not the product owner.
+
+```mermaid
+flowchart TB
+  subgraph INPUTS["What it reads"]
+    I1["Issue + acceptance criteria"]
+    I2["Project rules CLAUDE.md / AGENTS.md"]
+    I3["Relevant specs and ADRs"]
+    I4["Claims / handoff notes when needed"]
+  end
+
+  subgraph DOES["What it does"]
+    D1["Scoped changes on a feature branch"]
+    D2["Tests · build · hands-on checks"]
+    D3["Open PR with decision notes"]
+  end
+
+  subgraph DOES_NOT["What it does not do alone"]
+    N1["Decide product scope"]
+    N2["Merge to main / master"]
+    N3["Skip Codex or human review"]
+  end
+
+  INPUTS --> DOES
+  DOES --> X["Codex adversarial review"]
+  X --> H["I keep or reject findings"]
+  H --> P["PR · then human merge gate"]
+
+  classDef no fill:#fef2f2,stroke:#f87171,color:#0f172a
+  class N1,N2,N3 no
+```
+
+<p align="center"><sub>Repeatable skills for git / deploy / UI checks · judgment and merge stay with me</sub></p>
 
 
 <p align="center">
