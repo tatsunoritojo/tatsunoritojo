@@ -109,18 +109,19 @@
 
     // ---- geometry ----
     // Content width fixed; canvas has equal side margins + fb gutter
-    const CW = 232, CH = 52, GX = 28;
-    const RW = CW * 2 + GX;          // 492
-    const SIDE = 56;                 // left/right margin inside canvas
-    const FB = 44;                   // feedback gutter on right of cards
-    const W = SIDE + RW + FB + 20;   // ~612
-    const G = 40;                    // universal vertical gap between zones
-    // heights: brainBand + plan + G + build(2*CH+G) + G + ship + G/2 + prod
-    const BRAIN_BAND = 78;
-    const H = BRAIN_BAND + CH + G + (CH * 2 + G) + G + CH + 72;
+    const CW = 248, CH = 56, GX = 32;
+    const RW = CW * 2 + GX;          // 528
+    const SIDE = 64;                 // left/right margin inside canvas
+    const FB = 48;                   // feedback gutter on right of cards
+    const W = SIDE + RW + FB + 24;   // ~664 CSS px
+    const G = 44;                    // universal vertical gap between zones
+    // heights: brainBand + plan + G + build(2*CH+G) + G + ship + prod
+    const BRAIN_BAND = 84;
+    const H = BRAIN_BAND + CH + G + (CH * 2 + G) + G + CH + 80;
 
     const L = SIDE;                  // left edge of cards
-    const dpr = 2;
+    // 3x backing store → ~2000px wide export (GitHub retina / full-width)
+    const dpr = 3;
 
     const canvas = document.getElementById('c');
     canvas.width = W * dpr;
