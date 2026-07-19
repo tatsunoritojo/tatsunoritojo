@@ -197,4 +197,4 @@ The **learn → next claim** arrow is not “every story ends in success.” Mos
 
 ## Practice this page represents
 
-Separate a research vault (Obsidian), product docs, and change Issues; update judgments after outcomes. Tool names may change. **Start with information gathering, and never treat chat as the source of truth.**
+Separate a research vault (**Obsidian**), product docs, and **GitHub Issues**; update judgments after outcomes. When code changes, the ship cast is explicit: **ChatGPT** (repo-connected wall-bounce), **Claude Code** (implement), **Codex** (adversarial review), **me** (decide and merge). **Start with information gathering, and never treat chat as the source of truth.**

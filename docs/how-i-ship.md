@@ -206,4 +206,4 @@ Do not silently turn an implementation miss into a scope change.
 
 ## Practice this page represents
 
-In product work the skeleton is the same: gather information → Issue → branch → implement → adversarial review → PR → human merge. Checks and production steps differ by repository. The diagram shows the **shared order and responsibilities**.
+In the product repositories I run this way, the skeleton is the same: gather with **repo-connected ChatGPT** → **Issue** → branch → **Claude Code** implement → **Codex** adversarial review → human judgment → PR → **I merge**. Checks and production steps differ by repository. The diagram is that shared order—not a claim that every repo is identical.

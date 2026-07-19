@@ -145,4 +145,4 @@ Codex findings are proposals. I check the real code; if I reject a finding, I le
 
 ## Practice this page represents
 
-In private product work the skeleton matches: programmer = Claude Code (branch, PR), brain = me (decisions, merge), adversarial review before PR. CI and production steps differ by repository.
+In the product repositories I run this way: programmer = **Claude Code** (branch, open PR), brain = **me** (scope, findings, merge), adversarial review = **Codex** before the PR. CI and production steps differ by repository; Claude still does not own merge.
