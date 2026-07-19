@@ -44,6 +44,8 @@ Not a one-shot magic button. One change at a time.
 Hand-drawn on purpose. Issue-scoped. I merge (ChatGPT can argue).<br/>
 Tools propose and critique. I decide what ships.<br/>
 <a href="docs/how-i-ship.md">Read the full process →</a>
+·
+<a href="docs/ja/how-i-ship.md">日本語</a>
 </sub></p>
 
 
@@ -57,6 +59,8 @@ Useful observations become evidence-backed claims before they guide implementati
 
 <p align="center"><sub>Useful observations become evidence-backed claims; outcomes decide what survives. Decisions move into repository docs when they affect a product. Chat is draft, not source of truth.<br/>
 <a href="docs/how-knowledge.md">Read the full process →</a>
+·
+<a href="docs/ja/how-knowledge.md">日本語</a>
 </sub></p>
 
 ### How Claude Code works here
@@ -69,6 +73,8 @@ Claude Code is the implementer in the repository — not the product owner.
 
 <p align="center"><sub>Claude Code implements scoped changes; I own product decisions, review judgment, and merge.<br/>
 <a href="docs/how-claude.md">Read the full process →</a>
+·
+<a href="docs/ja/how-claude.md">日本語</a>
 </sub></p>
 
 

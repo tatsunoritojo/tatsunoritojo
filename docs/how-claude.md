@@ -4,7 +4,9 @@
 
 Claude Code is the **implementer in the repository**—not the product owner.
 
-This page is the prose companion to the diagram on my [GitHub profile](https://github.com/tatsunoritojo). Related: [How I ship](./how-i-ship.md) · [How knowledge compounds](./how-knowledge.md)
+This page is the prose companion to the diagram on my [GitHub profile](https://github.com/tatsunoritojo).  
+**日本語:** [How Claude Code works here（日本語）](./ja/how-claude.md)  
+Related: [How I ship](./how-i-ship.md) · [How knowledge compounds](./how-knowledge.md)
 
 ---
 

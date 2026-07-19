@@ -4,7 +4,9 @@
 
 Chat is draft. Claims need evidence. Outcomes decide what survives.
 
-This page is the prose companion to the diagram on my [GitHub profile](https://github.com/tatsunoritojo). Related: [How I ship](./how-i-ship.md) · [How Claude Code works here](./how-claude.md)
+This page is the prose companion to the diagram on my [GitHub profile](https://github.com/tatsunoritojo).  
+**日本語:** [How knowledge compounds（日本語）](./ja/how-knowledge.md)  
+Related: [How I ship](./how-i-ship.md) · [How Claude Code works here](./how-claude.md)
 
 ---
 

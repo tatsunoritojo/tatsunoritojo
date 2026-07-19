@@ -4,7 +4,9 @@
 
 Not a one-shot magic button. One change at a time. Issue-scoped. Tools propose and critique; **I decide what ships.**
 
-This page is the prose companion to the diagram on my [GitHub profile](https://github.com/tatsunoritojo). Related: [How knowledge compounds](./how-knowledge.md) · [How Claude Code works here](./how-claude.md)
+This page is the prose companion to the diagram on my [GitHub profile](https://github.com/tatsunoritojo).  
+**日本語:** [How I ship（日本語）](./ja/how-i-ship.md)  
+Related: [How knowledge compounds](./how-knowledge.md) · [How Claude Code works here](./how-claude.md)
 
 ---
 
