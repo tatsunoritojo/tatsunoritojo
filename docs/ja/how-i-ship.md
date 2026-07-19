@@ -17,7 +17,7 @@
 
 あわせて読む:
 
-- [知識が積み上がる仕組み](./how-knowledge.md) — 考えが claim や Issue になるまで  
+- [知識が積み上がる仕組み](./how-knowledge.md) — 考えが判断メモや Issue になるまで  
 - [ここでの Claude Code](./how-claude.md) — Claude Code に任せる範囲と任せない範囲  
 
 ---

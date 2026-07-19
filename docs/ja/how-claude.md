@@ -18,7 +18,7 @@
 あわせて読む:
 
 - [How I ship](./how-i-ship.md) — 思いつきから本番までの全体  
-- [知識が積み上がる仕組み](./how-knowledge.md) — claim と Issue の出どころ  
+- [知識が積み上がる仕組み](./how-knowledge.md) — 判断メモと Issue の出どころ  
 
 ---
 
