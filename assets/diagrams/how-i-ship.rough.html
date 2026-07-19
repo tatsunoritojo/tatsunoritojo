@@ -2,173 +2,361 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"/>
-<title>How I ship</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Patrick+Hand&display=swap" rel="stylesheet"/>
 <style>
-  * { box-sizing: border-box; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
-    margin: 0;
-    padding: 32px 28px 40px;
+    width: 760px;
+    padding: 16px 18px 12px;
     background: #fffef8;
-    font-family: "Segoe Print", "Comic Sans MS", "Chalkboard SE", "Hiragino Maru Gothic ProN", sans-serif;
-    color: #1a1a1a;
-    width: 520px;
+    font-family: "Patrick Hand", "Comic Sans MS", cursive;
+    color: #1c1917;
   }
   h1 {
     text-align: center;
-    font-size: 34px;
+    font-family: "Caveat", cursive;
+    font-size: 40px;
     font-weight: 700;
-    margin: 0 0 6px;
-    letter-spacing: -0.02em;
+    line-height: 1.05;
   }
-  .tagline {
+  .tag {
     text-align: center;
-    font-size: 13px;
-    color: #555;
-    margin-bottom: 22px;
-    line-height: 1.4;
+    font-size: 13.5px;
+    color: #57534e;
+    margin: 3px 0 8px;
   }
-  #c {
-    display: block;
-    margin: 0 auto;
+  .legend {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 2px;
+    font-size: 12.5px;
   }
-  .footer {
-    margin-top: 18px;
+  .legend span {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 2px 10px 3px;
+    border-radius: 999px;
+    border: 1.5px solid;
+  }
+  .legend .claude { background: #e0e7ff; border-color: #4338ca; color: #312e81; }
+  .legend .ai { background: #ccfbf1; border-color: #0f766e; color: #115e59; }
+  .legend .human { background: #dcfce7; border-color: #166534; color: #14532d; }
+  .legend i { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+  canvas { display: block; margin: 0 auto; }
+  .foot {
     text-align: center;
-    font-size: 13px;
-    color: #333;
-    line-height: 1.5;
+    font-size: 13.5px;
+    color: #44403c;
+    margin-top: 8px;
+    line-height: 1.35;
   }
-  .footer em { font-style: normal; color: #b45309; font-weight: 600; }
+  .foot em { font-style: normal; color: #b45309; font-weight: 700; }
 </style>
 </head>
 <body>
   <h1>How I ship</h1>
-  <p class="tagline">not a magic button · one change at a time<br/>Issue-scoped · I still own the merge</p>
-  <canvas id="c" width="920" height="1480"></canvas>
-  <p class="footer">
-    Tools propose and critique. I verify and decide. <em>Mostly.</em><br/>
-    <em>revise → Issue</em> (don’t restart the universe)
-  </p>
+  <p class="tag">not one-shot · Issue-scoped · one change at a time</p>
+  <div class="legend">
+    <span class="ai"><i style="background:#0f766e"></i>ChatGPT / Codex</span>
+    <span class="claude"><i style="background:#4338ca"></i>Claude Code</span>
+    <span class="human"><i style="background:#166534"></i>Human (me)</span>
+  </div>
+  <canvas id="c"></canvas>
+  <p class="foot">Tools propose and critique. I decide what ships.
+  · <em>revise → Issue</em> (don’t restart the universe)</p>
   <script src="https://unpkg.com/roughjs@4.6.6/bundled/rough.js"></script>
   <script>
-    const canvas = document.getElementById('c');
-    const ctx = canvas.getContext('2d');
-    // hi-dpi
+    /*
+      Final professional layout
+      - No outer frame
+      - Cycle ring only around BUILD (3–5)
+      - Brain above PLAN (over step 1)
+      - Production under step 7
+      - One grid, even vertical rhythm, even side margins
+    */
+    const steps = {
+      p1: { n: 1, title: 'Frame the change', sub: 'ChatGPT · explore & design', role: 'ai' },
+      p2: { n: 2, title: 'Define scope & acceptance', sub: 'Issue · docs · criteria', role: 'human' },
+      c3: { n: 3, title: 'Implement', sub: 'Claude Code · branch', role: 'claude' },
+      c4: { n: 4, title: 'Adversarial review', sub: 'Codex · vs Issue scope', role: 'ai' },
+      c5: { n: 5, title: 'Human judgment', sub: 'revise · or ready for PR', role: 'human' },
+      s6: { n: 6, title: 'Open PR', sub: 'link Issue · record decisions', role: 'claude' },
+      s7: { n: 7, title: 'Human merge gate', sub: 'ChatGPT reviews · I merge', role: 'human', final: true },
+    };
+    const colors = {
+      ai:     { fill: '#ccfbf1', stroke: '#0f766e', num: '#0f766e' },
+      claude: { fill: '#e0e7ff', stroke: '#4338ca', num: '#4338ca' },
+      human:  { fill: '#dcfce7', stroke: '#166534', num: '#166534' },
+      final:  {
+        fill: '#14532d', stroke: '#14532d',
+        numBg: '#bbf7d0', numFg: '#14532d',
+        title: '#f0fdf4', sub: '#bbf7d0',
+      },
+    };
+
+    const FONT = '"Patrick Hand", "Comic Sans MS", cursive';
+    const ROUGH = 1.0;
+    const BOW = 0.7;
+    const INK = '#44403c';       // normal flow arrows
+    const LOOP = '#d97706';      // cycle revise
+    const EXIT = '#166534';      // ready / ship / prod
+    const IDEA = '#7c3aed';      // brain entry
+
+    // ---- geometry ----
+    // Content width fixed; canvas has equal side margins + fb gutter
+    const CW = 232, CH = 52, GX = 28;
+    const RW = CW * 2 + GX;          // 492
+    const SIDE = 56;                 // left/right margin inside canvas
+    const FB = 44;                   // feedback gutter on right of cards
+    const W = SIDE + RW + FB + 20;   // ~612
+    const G = 40;                    // universal vertical gap between zones
+    // heights: brainBand + plan + G + build(2*CH+G) + G + ship + G/2 + prod
+    const BRAIN_BAND = 78;
+    const H = BRAIN_BAND + CH + G + (CH * 2 + G) + G + CH + 72;
+
+    const L = SIDE;                  // left edge of cards
     const dpr = 2;
-    const W = 460, H = 740;
+
+    const canvas = document.getElementById('c');
     canvas.width = W * dpr;
     canvas.height = H * dpr;
     canvas.style.width = W + 'px';
     canvas.style.height = H + 'px';
+    const ctx = canvas.getContext('2d');
     ctx.scale(dpr, dpr);
     ctx.fillStyle = '#fffef8';
     ctx.fillRect(0, 0, W, H);
-
     const rc = rough.canvas(canvas);
-    const steps = [
-      { n: 1, phase: 'PLAN', title: 'Frame the change', sub: 'ChatGPT · wall-bounce & design', fill: '#d1fae5', stroke: '#0f766e' },
-      { n: 2, phase: 'PLAN', title: 'Define scope & acceptance', sub: 'Issue · docs · criteria', fill: '#ccfbf1', stroke: '#0f766e' },
-      { n: 3, phase: 'BUILD', title: 'Implement on a branch', sub: 'Claude Code · scoped only', fill: '#e0e7ff', stroke: '#4338ca' },
-      { n: 4, phase: 'BUILD', title: 'Verify behavior', sub: 'tests · build · hands-on', fill: '#eef2ff', stroke: '#4338ca' },
-      { n: 5, phase: 'REVIEW', title: 'Adversarial review', sub: 'Codex · diff vs Issue scope', fill: '#fef3c7', stroke: '#b45309' },
-      { n: 6, phase: 'REVIEW', title: 'Human judgment', sub: 'I keep / reject findings', fill: '#ffedd5', stroke: '#b45309' },
-      { n: 7, phase: 'SHIP', title: 'Open pull request', sub: 'link Issue · record decisions', fill: '#dcfce7', stroke: '#166534' },
-      { n: 8, phase: 'SHIP', title: 'Human merge gate', sub: 'ChatGPT reviews · I merge or revise', fill: '#14532d', stroke: '#14532d', final: true },
-    ];
 
-    const boxX = 70, boxW = 340, boxH = 62, gap = 18;
-    let y = 8;
-    const centers = [];
-    let lastPhase = '';
-
-    // rough font for labels - use canvas fillText with casual font
-    ctx.font = '600 15px "Segoe Print", "Comic Sans MS", "Chalkboard SE", sans-serif';
-
-    steps.forEach((s, i) => {
-      if (s.phase !== lastPhase) {
-        ctx.save();
-        ctx.fillStyle = s.stroke;
-        ctx.font = '700 11px ui-sans-serif, system-ui, sans-serif';
-        ctx.fillText(s.phase, 12, y + 18);
-        ctx.restore();
-        lastPhase = s.phase;
-      }
-
-      const opts = {
-        roughness: 1.6,
-        bowing: 1.2,
-        stroke: s.stroke,
-        strokeWidth: s.final ? 2.4 : 1.6,
-        fill: s.fill,
-        fillStyle: 'solid',
-      };
-      rc.rectangle(boxX, y, boxW, boxH, opts);
-
-      // number circle
-      rc.circle(boxX + 28, y + boxH / 2, 28, {
-        roughness: 1.3,
-        stroke: s.final ? '#bbf7d0' : s.stroke,
-        strokeWidth: 1.5,
-        fill: s.final ? '#bbf7d0' : s.stroke,
-        fillStyle: 'solid',
+    function drawCard(x, y, w, h, step, opts) {
+      opts = opts || {};
+      const c = step.final ? colors.final : colors[step.role];
+      rc.rectangle(x, y, w, h, {
+        roughness: ROUGH, bowing: BOW,
+        stroke: c.stroke, strokeWidth: step.final ? 2.0 : 1.4,
+        fill: c.fill, fillStyle: 'solid',
       });
-      ctx.fillStyle = s.final ? '#14532d' : '#fff';
-      ctx.font = '700 14px ui-sans-serif, system-ui, sans-serif';
+      const numBg = step.final ? c.numBg : c.num;
+      const numFg = step.final ? c.numFg : '#fff';
+      const numX = opts.center ? x + w / 2 - 68 : x + 18;
+      const textX = opts.center ? numX + 20 : x + 38;
+      rc.circle(numX, y + h / 2, 22, {
+        roughness: 0.9, stroke: numBg, fill: numBg, fillStyle: 'solid', strokeWidth: 1.0,
+      });
+      ctx.fillStyle = numFg;
+      ctx.font = '700 14px ' + FONT;
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
-      ctx.fillText(String(s.n), boxX + 28, y + boxH / 2 + 0.5);
-
+      ctx.fillText(String(step.n), numX, y + h / 2 + 0.5);
       ctx.textAlign = 'left';
       ctx.textBaseline = 'alphabetic';
-      ctx.fillStyle = s.final ? '#f0fdf4' : '#111';
-      ctx.font = '700 15px ui-sans-serif, system-ui, sans-serif';
-      ctx.fillText(s.title, boxX + 52, y + 26);
-      ctx.fillStyle = s.final ? '#bbf7d0' : '#555';
-      ctx.font = '12px ui-sans-serif, system-ui, sans-serif';
-      ctx.fillText(s.sub, boxX + 52, y + 44);
-
-      centers.push({ y, cy: y + boxH / 2, bottom: y + boxH });
-      y += boxH + gap;
-    });
-
-    // forward arrows
-    for (let i = 0; i < centers.length - 1; i++) {
-      const x = boxX + boxW / 2;
-      const y1 = centers[i].bottom + 1;
-      const y2 = centers[i + 1].y - 1;
-      rc.line(x, y1, x, y2 - 6, { roughness: 1.2, stroke: '#666', strokeWidth: 1.4 });
-      // arrow head
-      rc.linearPath([
-        [x - 5, y2 - 10],
-        [x, y2 - 2],
-        [x + 5, y2 - 10],
-      ], { roughness: 0.8, stroke: '#666', strokeWidth: 1.4 });
+      ctx.fillStyle = step.final ? c.title : '#1c1917';
+      ctx.font = '600 15px ' + FONT;
+      ctx.fillText(step.title, textX, y + 21);
+      ctx.fillStyle = step.final ? c.sub : '#57534e';
+      ctx.font = '13px ' + FONT;
+      ctx.fillText(step.sub, textX, y + 38);
+      return { x, y, w, h, cx: x + w / 2, cy: y + h / 2, x2: x + w, y2: y + h };
     }
 
-    // revise dashed: 8 -> 2
-    const c8 = centers[7], c2 = centers[1];
-    const rx = boxX + boxW + 18;
-    rc.line(boxX + boxW, c8.cy, rx, c8.cy, { roughness: 1.4, stroke: '#d97706', strokeWidth: 1.6, strokeLineDash: [6, 5] });
-    rc.line(rx, c8.cy, rx, c2.cy, { roughness: 1.4, stroke: '#d97706', strokeWidth: 1.6, strokeLineDash: [6, 5] });
-    rc.line(rx, c2.cy, boxX + boxW + 2, c2.cy, { roughness: 1.4, stroke: '#d97706', strokeWidth: 1.6, strokeLineDash: [6, 5] });
-    // arrow into step 2
-    rc.linearPath([
-      [boxX + boxW + 10, c2.cy - 5],
-      [boxX + boxW + 2, c2.cy],
-      [boxX + boxW + 10, c2.cy + 5],
-    ], { roughness: 0.8, stroke: '#d97706', strokeWidth: 1.6 });
+    function line(x1, y1, x2, y2, stroke, width, dash) {
+      const o = { roughness: 0.9, stroke, strokeWidth: width || 1.4 };
+      if (dash) o.strokeLineDash = dash;
+      rc.line(x1, y1, x2, y2, o);
+    }
+    function head(x, y, ang, stroke) {
+      const len = 6;
+      const a1 = ang + Math.PI * 0.78, a2 = ang - Math.PI * 0.78;
+      rc.linearPath([
+        [x + Math.cos(a1) * len, y + Math.sin(a1) * len],
+        [x, y],
+        [x + Math.cos(a2) * len, y + Math.sin(a2) * len],
+      ], { roughness: 0.5, stroke, strokeWidth: 1.3 });
+    }
+    function hArrow(x1, y, x2, stroke) {
+      line(x1, y, x2, y, stroke);
+      head(x2, y, x2 >= x1 ? 0 : Math.PI, stroke);
+    }
+    function vArrow(x, y1, y2, stroke) {
+      line(x, y1, x, y2, stroke);
+      head(x, y2, y2 >= y1 ? Math.PI / 2 : -Math.PI / 2, stroke);
+    }
+    function label(x, y, text, color, size) {
+      ctx.fillStyle = color;
+      ctx.font = '700 ' + (size || 12) + 'px ' + FONT;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(text, x, y);
+    }
+    function zoneLabel(x, y, text, color) {
+      ctx.fillStyle = color;
+      ctx.font = '700 13px ' + FONT;
+      ctx.textAlign = 'left';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(text, x, y);
+    }
 
-    ctx.save();
-    ctx.fillStyle = '#d97706';
-    ctx.font = '700 11px ui-sans-serif, system-ui, sans-serif';
-    ctx.translate(rx + 14, (c8.cy + c2.cy) / 2);
-    ctx.rotate(Math.PI / 2);
-    ctx.textAlign = 'center';
-    ctx.fillText('revise → Issue', 0, 0);
-    ctx.restore();
+    function drawBrain(cx, cy, s) {
+      s = s || 1.15;
+      rc.ellipse(cx - 11 * s, cy, 28 * s, 34 * s, {
+        roughness: 1.1, stroke: IDEA, strokeWidth: 1.5,
+        fill: '#ede9fe', fillStyle: 'solid',
+      });
+      rc.ellipse(cx + 11 * s, cy, 28 * s, 34 * s, {
+        roughness: 1.1, stroke: IDEA, strokeWidth: 1.5,
+        fill: '#ede9fe', fillStyle: 'solid',
+      });
+      line(cx, cy - 14 * s, cx, cy + 14 * s, IDEA, 1.1);
+      rc.curve([[cx - 16 * s, cy - 6 * s], [cx - 20 * s, cy], [cx - 14 * s, cy + 8 * s]], {
+        roughness: 1.0, stroke: '#8b5cf6', strokeWidth: 1.05,
+      });
+      rc.curve([[cx + 14 * s, cy - 8 * s], [cx + 20 * s, cy], [cx + 15 * s, cy + 7 * s]], {
+        roughness: 1.0, stroke: '#8b5cf6', strokeWidth: 1.05,
+      });
+      [[cx + 26 * s, cy - 20 * s], [cx + 32 * s, cy - 12 * s]].forEach(([x, y], i) => {
+        rc.circle(x, y, (5 - i * 0.8) * s, {
+          roughness: 0.85, stroke: LOOP, fill: '#fde68a', fillStyle: 'solid', strokeWidth: 1,
+        });
+      });
+      // label to the right of brain so the down-arrow stays clean
+      ctx.fillStyle = '#6d28d9';
+      ctx.font = '700 13px ' + FONT;
+      ctx.textAlign = 'left';
+      ctx.textBaseline = 'middle';
+      ctx.fillText('my idea', cx + 30 * s, cy + 2);
+    }
 
-    // signal ready
-    document.title = 'READY';
+    function drawProd(cx, cy, s) {
+      s = s || 1.1;
+      // compact horizontal: code → cloud, centered under 7
+      const docW = 28 * s, docH = 32 * s;
+      const docX = cx - 48 * s, docY = cy - docH / 2;
+      rc.rectangle(docX, docY, docW, docH, {
+        roughness: ROUGH, bowing: BOW, stroke: '#4338ca', strokeWidth: 1.35,
+        fill: '#e0e7ff', fillStyle: 'solid',
+      });
+      line(docX + 5 * s, cy - 6 * s, docX + 20 * s, cy - 6 * s, '#6366f1', 1.15);
+      line(docX + 5 * s, cy + 2 * s, docX + 18 * s, cy + 2 * s, '#6366f1', 1.15);
+      line(docX + 5 * s, cy + 10 * s, docX + 16 * s, cy + 10 * s, '#6366f1', 1.15);
+      hArrow(docX + docW + 2, cy, cx + 4 * s, EXIT);
+      rc.ellipse(cx + 28 * s, cy, 34 * s, 28 * s, {
+        roughness: 1.1, stroke: EXIT, strokeWidth: 1.4,
+        fill: '#dcfce7', fillStyle: 'solid',
+      });
+      rc.circle(cx + 40 * s, cy - 10 * s, 5 * s, {
+        roughness: 0.8, stroke: EXIT, fill: '#22c55e', fillStyle: 'solid', strokeWidth: 1,
+      });
+      label(cx + 8 * s, cy + 28 * s, 'production', EXIT, 13);
+    }
+
+    async function main() {
+      try {
+        await Promise.all([
+          document.fonts.load('700 40px Caveat'),
+          document.fonts.load('600 15px Patrick Hand'),
+          document.fonts.load('13px Patrick Hand'),
+          document.fonts.load('700 13px Patrick Hand'),
+          document.fonts.load('700 12px Patrick Hand'),
+        ]);
+      } catch (e) {}
+
+      // ---- Y stack (even G) ----
+      const yPlan = BRAIN_BAND;
+      const yBuild = yPlan + CH + G;
+      const yC5 = yBuild + CH + G;
+      const yShip = yC5 + CH + G;
+      const yProd = yShip + CH + 46;
+
+      // ---- Brain above step 1 ----
+      const brainX = L + CW / 2;
+      const brainY = 28;
+      drawBrain(brainX, brainY, 1.12);
+      // tight drop into card 1 (clear of "my idea")
+      vArrow(brainX, brainY + 38, yPlan - 2, IDEA);
+
+      // ---- PLAN ----
+      zoneLabel(L, yPlan - 12, 'PLAN', '#0f766e');
+      const p1 = drawCard(L, yPlan, CW, CH, steps.p1);
+      const p2 = drawCard(L + CW + GX, yPlan, CW, CH, steps.p2);
+      hArrow(p1.x2 + 2, p1.cy, p2.x - 2, INK);
+
+      // ---- BUILD cycle ring ----
+      const ringCx = L + RW / 2;
+      const ringCy = yBuild + CH + G / 2;
+      const ringW = RW + 48;
+      const ringH = CH * 2 + G + 36;
+      rc.ellipse(ringCx, ringCy, ringW, ringH, {
+        roughness: 1.15, stroke: '#818cf8', strokeWidth: 1.55,
+        fill: '#eef2ff', fillStyle: 'solid',
+      });
+      rc.ellipse(ringCx, ringCy, ringW - 30, ringH - 24, {
+        roughness: 1.0, stroke: '#a5b4fc', strokeWidth: 1.05,
+        strokeLineDash: [4, 5], fill: 'transparent',
+      });
+
+      zoneLabel(L, yBuild - 12, 'BUILD · REVIEW (loop)', '#4338ca');
+
+      const c3 = drawCard(L, yBuild, CW, CH, steps.c3);
+      const c4 = drawCard(L + CW + GX, yBuild, CW, CH, steps.c4);
+      const c5 = drawCard(L, yC5, RW, CH, steps.c5, { center: true });
+
+      hArrow(c3.x2 + 2, c3.cy, c4.x - 2, INK);
+      vArrow(c4.cx, c4.y2 + 1, c5.y - 1, INK);
+
+      // cycle revise 5 → 3 (left column)
+      line(c3.cx, c5.y - 1, c3.cx, c3.y2 + 2, LOOP, 1.4, [5, 4]);
+      head(c3.cx, c3.y2 + 2, -Math.PI / 2, LOOP);
+      label(c3.cx - 26, (c5.y + c3.y2) / 2, 'revise', LOOP, 12);
+      label(ringCx + 8, (c3.y2 + c5.y) / 2, 'dev cycle', '#4f46e5', 12);
+
+      // 2 → 3 entry (short, clean dogleg)
+      const entryY = yBuild - 12;
+      line(p2.cx, p2.y2 + 1, p2.cx, entryY, INK);
+      line(p2.cx, entryY, c3.cx, entryY, INK);
+      vArrow(c3.cx, entryY, c3.y - 1, INK);
+
+      // ---- SHIP ----
+      zoneLabel(L, yShip - 12, 'SHIP', EXIT);
+      const s6 = drawCard(L, yShip, CW, CH, steps.s6);
+      const s7 = drawCard(L + CW + GX, yShip, CW, CH, steps.s7);
+      hArrow(s6.x2 + 2, s6.cy, s7.x - 2, EXIT);
+
+      // ready exit
+      vArrow(s6.cx, c5.y2 + 1, s6.y - 1, EXIT);
+      label(s6.cx + 28, (c5.y2 + s6.y) / 2, 'ready', EXIT, 12);
+
+      // ---- production under 7 ----
+      vArrow(s7.cx, s7.y2 + 2, yProd - 30, EXIT);
+      drawProd(s7.cx, yProd, 1.08);
+
+      // ---- revise → Issue (short right rail) ----
+      const fbX = L + RW + 22;
+      line(s7.x2, s7.cy, fbX, s7.cy, LOOP, 1.35, [5, 4]);
+      line(fbX, s7.cy, fbX, p2.cy, LOOP, 1.35, [5, 4]);
+      line(fbX, p2.cy, p2.x2 + 2, p2.cy, LOOP, 1.35, [5, 4]);
+      head(p2.x2 + 2, p2.cy, Math.PI, LOOP);
+      ctx.save();
+      ctx.fillStyle = LOOP;
+      ctx.font = '700 11px ' + FONT;
+      ctx.translate(fbX + 12, (s7.cy + p2.cy) / 2);
+      ctx.rotate(-Math.PI / 2);
+      ctx.textAlign = 'center';
+      ctx.fillText('revise → Issue', 0, 0);
+      ctx.restore();
+
+      document.title = 'READY';
+    }
+
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(main);
+    } else {
+      main();
+    }
   </script>
 </body>
 </html>
