@@ -26,6 +26,7 @@
 ### Start here
 
 - [Portfolio](https://tatsunoritojo.com) — selected work and writing
+- [Use this workflow — Reliable Ship](https://github.com/tatsunoritojo/claude-code-project-starter) — frame, verify, challenge, and keep the final merge decision human
 - [MacKairu](https://github.com/tatsunoritojo/MacKairu) — a resident mascot AI for macOS
 - [Onedrop attendance & ops](https://tatsunoritojo.com/works/education-ops) — school operations systems (attendance and related tooling; not the public school website)
 - [こどもの進路案内所](https://kodomo-shinro.jp) · [通信制高校診断](https://shindan.kodomo-shinro.jp/) — two sites built for Onedrop (parent guide + diagnostic)
@@ -43,6 +44,8 @@ Not a one-shot magic button. One change at a time.
 <p align="center"><sub>
 Hand-drawn on purpose. Issue-scoped. I merge (ChatGPT can argue).<br/>
 Tools propose and critique. I decide what ships.<br/>
+<a href="https://github.com/tatsunoritojo/claude-code-project-starter"><strong>Use this workflow →</strong></a>
+·
 <a href="docs/how-i-ship.md">Read the full process →</a>
 ·
 <a href="docs/ja/how-i-ship.md">日本語</a>
